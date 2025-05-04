@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6c8bbfd8ee030fdd5c4519cd8423c83",
+    "content-hash": "ba42f0695a01647a050fb2a47a726137",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -5336,7 +5336,7 @@
         },
         {
             "name": "typo3-incubator/surfcamp-events",
-            "version": "dev-main",
+            "version": "dev-surfcamp-events-plugin",
             "dist": {
                 "type": "path",
                 "url": "packages/surfcamp-events",
@@ -6871,6 +6871,64 @@
             "support": {
                 "chat": "https://typo3.org/help",
                 "docs": "https://docs.typo3.org",
+                "issues": "https://forge.typo3.org",
+                "source": "https://github.com/typo3/typo3"
+            },
+            "time": "2025-04-08T08:18:25+00:00"
+        },
+        {
+            "name": "typo3/cms-reactions",
+            "version": "v13.4.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TYPO3-CMS/reactions.git",
+                "reference": "74497791f0c6481b480a93b36dc351f0d7bbd55a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TYPO3-CMS/reactions/zipball/74497791f0c6481b480a93b36dc351f0d7bbd55a",
+                "reference": "74497791f0c6481b480a93b36dc351f0d7bbd55a",
+                "shasum": ""
+            },
+            "require": {
+                "typo3/cms-core": "13.4.9"
+            },
+            "conflict": {
+                "typo3/cms": "*"
+            },
+            "suggest": {
+                "typo3/cms-lowlevel": "To display registered reactions in the configuration module"
+            },
+            "type": "typo3-cms-framework",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "reactions"
+                },
+                "branch-alias": {
+                    "dev-main": "13.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TYPO3\\CMS\\Reactions\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "TYPO3 Core Team",
+                    "email": "typo3cms@typo3.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TYPO3 CMS Reactions - Handle incoming Webhooks for TYPO3",
+            "homepage": "https://typo3.org",
+            "support": {
+                "chat": "https://typo3.org/help",
+                "docs": "https://docs.typo3.org/c/typo3/cms-reactions/main/en-us/",
                 "issues": "https://forge.typo3.org",
                 "source": "https://github.com/typo3/typo3"
             },
