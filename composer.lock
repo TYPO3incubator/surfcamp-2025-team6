@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ffcd25ce8392371b25789f790af3b99f",
+    "content-hash": "c6c8bbfd8ee030fdd5c4519cd8423c83",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -5335,6 +5335,38 @@
             }
         },
         {
+            "name": "typo3-incubator/surfcamp-events",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/surfcamp-events",
+                "reference": "b6e7a5601fab7709c33ba233bf6d2d3ec0cd9cbf"
+            },
+            "require": {
+                "typo3/cms-core": "^13.4"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "surfcamp_events"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TYPO3Incubator\\SurfcampEvents\\": "Classes/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "keywords": [
+                "TYPO3 CMS"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "typo3-incubator/theme-fcbigfoot",
             "version": "0.0.1",
             "source": {
@@ -7391,7 +7423,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "typo3-incubator/surfcamp-base": 20
+        "typo3-incubator/surfcamp-base": 20,
+        "typo3-incubator/surfcamp-events": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
