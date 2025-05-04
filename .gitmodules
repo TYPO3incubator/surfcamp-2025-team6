@@ -1,0 +1,3 @@
+[submodule "packages/sf_event_mgt"]
+	path = packages/sf_event_mgt
+	url = https://github.com/typoniels/sf_event_mgt.git
