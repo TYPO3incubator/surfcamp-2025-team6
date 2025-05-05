@@ -15,10 +15,10 @@ return [
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Registration.svg',
     ],
     'interface' => [
-        'showRecordFieldList' => 'name, email, event, appointment',
+        'showRecordFieldList' => 'title, email, event, appointment',
     ],
     'types' => [
-        '1' => ['showitem' => 'name, email, event, appointment'],
+        '1' => ['showitem' => 'title, email, event, appointment'],
     ],
     'columns' => [
         'hidden' => [
@@ -28,7 +28,7 @@ return [
                 'type' => 'check',
             ],
         ],
-        'name' => [
+        'title' => [
             'label' => 'Name',
             'config' => [
                 'type' => 'input',
@@ -40,28 +40,6 @@ return [
             'config' => [
                 'type' => 'input',
                 'eval' => 'required,trim,email',
-            ],
-        ],
-        'event' => [
-            'exclude' => true,
-            'label' => 'Event',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_surfcamp_events_event',
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
-        ],
-        'appointment' => [
-            'exclude' => true,
-            'label' => 'Appointment',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_surfcamp_events_appointment',
-                'minitems' => 0,
-                'maxitems' => 1,
             ],
         ],
     ],

@@ -20,10 +20,10 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time, appointment, location',
+        'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time, appointment, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, appointment, location'],
+        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, appointment, location, registration'],
     ],
     'columns' => [
         'hidden' => [
@@ -93,6 +93,14 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_surfcamp_events_location',
+            ],
+        ],
+        'registration' => [
+            'label' => 'Registrations',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_surfcamp_events_registration',
+                'foreign_field' => 'registration',
             ],
         ],
     ],

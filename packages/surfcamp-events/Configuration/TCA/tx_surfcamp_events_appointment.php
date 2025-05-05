@@ -15,10 +15,10 @@ return [
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
     ],
     'interface' => [
-        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, location',
+        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, location'],
+        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, location, registration'],
     ],
     'columns' => [
         'title' => [
@@ -54,6 +54,14 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_surfcamp_events_location',
+            ],
+        ],
+        'registration' => [
+            'label' => 'Registrations',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_surfcamp_events_registration',
+                'foreign_field' => 'registration',
             ],
         ],
     ],
