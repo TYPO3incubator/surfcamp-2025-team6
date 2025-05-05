@@ -3,7 +3,7 @@
 return [
     'ctrl' => [
         'title' => 'Registration',
-        'label' => 'name',
+        'label' => 'email',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -15,10 +15,10 @@ return [
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Registration.svg',
     ],
     'interface' => [
-        'showRecordFieldList' => 'title, email, event, appointment',
+        'showRecordFieldList' => 'email, event, appointment',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, email, event, appointment'],
+        '1' => ['showitem' => 'email, event, appointment'],
     ],
     'columns' => [
         'hidden' => [
@@ -26,13 +26,6 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-            ],
-        ],
-        'title' => [
-            'label' => 'Name',
-            'config' => [
-                'type' => 'input',
-                'eval' => 'required,trim',
             ],
         ],
         'email' => [
