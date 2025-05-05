@@ -39,6 +39,7 @@
         "bk2k/bootstrap-package": "^15.0",
         "derhansen/sf_event_mgt": "dev-main",
         "typo3-incubator/surfcamp-base": "dev-main",
+        "typo3-incubator/surfcamp-events": "@dev",
         "typo3-incubator/theme-fcbigfoot": "^0.0.1",
         "typo3/cms-backend": "^13.4",
         "typo3/cms-belog": "^13.4",
