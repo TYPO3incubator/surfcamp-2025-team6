@@ -15,10 +15,10 @@ return [
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
     ],
     'interface' => [
-        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time',
+        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, location',
     ],
     'types' => [
-        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time'],
+        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, location'],
     ],
     'columns' => [
         'title' => [
@@ -46,6 +46,14 @@ return [
             'label' => 'End Date & Time',
             'config' => [
                 'type' => 'datetime',
+            ],
+        ],
+        'location' => [
+            'label' => 'Location',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_surfcamp_events_location',
             ],
         ],
     ],
