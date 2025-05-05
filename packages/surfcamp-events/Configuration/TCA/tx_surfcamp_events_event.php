@@ -23,7 +23,7 @@ return [
         'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time, appointment, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, appointment, location, registration'],
+        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, appointment, location, registration, is_open_for_registrations'],
     ],
     'columns' => [
         'hidden' => [
@@ -103,5 +103,11 @@ return [
                 'foreign_field' => 'registration',
             ],
         ],
+        'is_open_for_registrations' => [
+            'label' => 'Event accepts registrations',
+            'config' => [
+                'type' => 'check',
+            ]
+        ]
     ],
 ];
