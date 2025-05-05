@@ -71,15 +71,15 @@ return [
         'lat' => [
             'label' => 'Latitute',
             'config' => [
-                'type' => 'input',
-                'eval' => 'required,trim',
+                'type' => 'number',
+                'format' => 'decimal',
             ],
         ],
         'long' => [
             'label' => 'Longitude',
             'config' => [
-                'type' => 'input',
-                'eval' => 'required,trim',
+                'type' => 'number',
+                'format' => 'decimal',
             ],
         ],
     ],
