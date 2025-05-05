@@ -3,7 +3,7 @@
 return [
     'ctrl' => [
         'title' => 'Location',
-        'label' => 'title',
+        'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
