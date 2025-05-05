@@ -3,6 +3,7 @@
 namespace TYPO3Incubator\SurfcampEvents\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Event extends AbstractDomainObject
 {
@@ -22,14 +23,43 @@ class Event extends AbstractDomainObject
     protected string $event_type = '';
 
     /**
-     * @var string
+     * @var int
      */
-    protected string $start_date_time = '';
+    protected int $start_date_time = 0;
 
     /**
-     * @var string
+     * @var int
      */
-    protected string $end_date_time = '';
+    protected int $end_date_time = 0;
+
+    /**
+     * @var null|ObjectStorage<Appointment>
+     */
+    protected $appointment = null;
+
+    /**
+     * @var null|ObjectStorage<Registration>
+     */
+    protected $registration = null;
+
+    /**
+     * @var Location|null
+     */
+    protected mixed $location = null;
+
+    /**
+     * @return void
+     */
+    protected function initStorageObjects()
+    {
+        $this->appointment = new ObjectStorage();
+        $this->registration = new ObjectStorage();
+    }
+
+    public function __construct()
+    {
+        $this->initStorageObjects();
+    }
 
     public function getTitle(): string
     {
@@ -66,18 +96,23 @@ class Event extends AbstractDomainObject
         return $this->start_date_time;
     }
 
-    public function setStartDateTime(string $start_date_time): void
-    {
-        $this->start_date_time = $start_date_time;
-    }
-
-    public function getEndDateTime(): string
+    public function getEndDateTime(): int
     {
         return $this->end_date_time;
     }
 
-    public function setEndDateTime(string $end_date_time): void
+    public function setEndDateTime(int $end_date_time): void
     {
         $this->end_date_time = $end_date_time;
+    }
+
+    public function getLocation(): mixed
+    {
+        return $this->location;
+    }
+
+    public function setLocation(mixed $location): void
+    {
+        $this->location = $location;
     }
 }
