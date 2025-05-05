@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fd1933fc6dd1cfed039fdc110402d8a",
+    "content-hash": "c6c8bbfd8ee030fdd5c4519cd8423c83",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -277,68 +277,6 @@
                 "source": "https://github.com/DASPRiD/Enum/tree/1.0.6"
             },
             "time": "2024-08-09T14:30:48+00:00"
-        },
-        {
-            "name": "derhansen/sf_event_mgt",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/derhansen/sf_event_mgt.git",
-                "reference": "0484f2e39901353fd96afcbee7fddb56b0597b31"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/derhansen/sf_event_mgt/zipball/0484f2e39901353fd96afcbee7fddb56b0597b31",
-                "reference": "0484f2e39901353fd96afcbee7fddb56b0597b31",
-                "shasum": ""
-            },
-            "require": {
-                "typo3/cms-core": "^13.4"
-            },
-            "default-branch": true,
-            "type": "typo3-cms-extension",
-            "extra": {
-                "typo3/cms": {
-                    "extension-key": "sf_event_mgt"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "DERHANSEN\\SfEventMgt\\": "Classes"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Torben Hansen",
-                    "email": "derhansen@gmail.com",
-                    "homepage": "https://www.derhansen.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Configurable event management and registration extension based on ExtBase and Fluid",
-            "homepage": "https://github.com/derhansen/sf_event_mgt",
-            "keywords": [
-                "TYPO3 CMS",
-                "event management",
-                "event registration",
-                "extbase",
-                "fluid"
-            ],
-            "support": {
-                "issues": "https://github.com/derhansen/sf_event_mgt/issues",
-                "source": "https://github.com/derhansen/sf_event_mgt/tree/8.1.1"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/derhansen",
-                    "type": "custom"
-                }
-            ],
-            "time": "2025-01-21T10:49:28+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -7491,7 +7429,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "derhansen/sf_event_mgt": 20,
         "typo3-incubator/surfcamp-base": 20,
         "typo3-incubator/surfcamp-events": 20
     },

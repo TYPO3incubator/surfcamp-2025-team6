@@ -21,13 +21,6 @@ return [
         '1' => ['showitem' => 'email, event, appointment'],
     ],
     'columns' => [
-        'hidden' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
         'email' => [
             'label' => 'Email',
             'config' => [
