@@ -21,24 +21,6 @@ return [
         '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time'],
     ],
     'columns' => [
-        'hidden' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-            ],
-        ],
-        'event' => [
-            'exclude' => true,
-            'label' => 'Event',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_surfcamp_events_events',
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
-        ],
         'title' => [
             'label' => 'Title',
             'config' => [

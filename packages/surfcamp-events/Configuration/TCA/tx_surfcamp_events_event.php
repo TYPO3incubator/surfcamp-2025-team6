@@ -20,10 +20,10 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time',
+        'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time, appointment',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time'],
+        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, appointment'],
     ],
     'columns' => [
         'hidden' => [
@@ -77,6 +77,14 @@ return [
             'label' => 'End Date & Time',
             'config' => [
                 'type' => 'datetime',
+            ],
+        ],
+        'appointment' => [
+            'label' => 'Appointments',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_surfcamp_events_appointment',
+                'foreign_field' => 'event',
             ],
         ],
     ],

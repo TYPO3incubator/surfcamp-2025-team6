@@ -48,7 +48,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_surfcamp_events_events',
+                'foreign_table' => 'tx_surfcamp_events_event',
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
@@ -59,7 +59,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_surfcamp_events_appointments',
+                'foreign_table' => 'tx_surfcamp_events_appointment',
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
