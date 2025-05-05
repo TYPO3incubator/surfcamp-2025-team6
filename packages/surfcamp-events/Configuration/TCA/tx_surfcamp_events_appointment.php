@@ -15,10 +15,10 @@ return [
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
     ],
     'interface' => [
-        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, location, registration',
+        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, location, registration'],
+        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration'],
     ],
     'columns' => [
         'title' => [
@@ -42,10 +42,39 @@ return [
                 'type' => 'datetime',
             ],
         ],
+        'start_date_time_utc' => [
+            'label' => 'Start Date & Time [UTC]',
+            'config' => [
+                'type' => 'datetime',
+            ],
+        ],
         'end_date_time' => [
             'label' => 'End Date & Time',
             'config' => [
                 'type' => 'datetime',
+            ],
+        ],
+        'end_date_time_utc' => [
+            'label' => 'End Date & Time [UTC]',
+            'config' => [
+                'type' => 'datetime',
+            ],
+        ],
+        'timezone' => [
+            'label' => 'Timezone',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => array_map(function($tz) {
+                    return [$tz, $tz];
+                }, \DateTimeZone::listIdentifiers()),
+                'default' => $GLOBALS['BE_USER']->uc['timezone'],
+            ],
+        ],
+        'tzdb_version' => [
+            'label' => 'tzdb version',
+            'config' => [
+                'type' => 'input',
             ],
         ],
         'location' => [
