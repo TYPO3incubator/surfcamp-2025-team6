@@ -12,7 +12,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'name,email',
-        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Registration.svg',
+//        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Registration.svg',
     ],
     'interface' => [
         'showRecordFieldList' => 'name, email, event, appointment',

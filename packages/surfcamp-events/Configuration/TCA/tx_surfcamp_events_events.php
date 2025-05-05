@@ -12,7 +12,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,description',
-        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Event.svg',
+//        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Event.svg',
         'security' => [
             'ignoreWebMountRestriction' => true,
             'ignoreRootLevelRestriction' => true,

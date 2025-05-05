@@ -12,7 +12,7 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,description',
-        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
+//        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
     ],
     'interface' => [
         'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time',
