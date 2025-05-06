@@ -69,17 +69,19 @@ return [
             ],
         ],
         'latitude' => [
-            'label' => 'Latitute',
+            'label' => 'Latitude',
             'config' => [
                 'type' => 'input',
-                'eval' => 'double2',
+                'eval' => 'double',
+                'size' => 20,
             ],
         ],
         'longitude' => [
             'label' => 'Longitude',
             'config' => [
                 'type' => 'input',
-                'eval' => 'double2',
+                'eval' => 'double',
+                'size' => 20,
             ],
         ],
         'timezone' => [
