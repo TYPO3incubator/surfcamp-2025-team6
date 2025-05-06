@@ -1,5 +1,7 @@
 <?php
 
+$timezoneService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3Incubator\SurfcampEvents\Service\TimezoneService::class);
+
 return [
     'ctrl' => [
         'title' => 'Appointment',
@@ -68,7 +70,7 @@ return [
                 'items' => array_map(function($tz) {
                     return [$tz, $tz];
                 }, \DateTimeZone::listIdentifiers()),
-                'default' => $GLOBALS['BE_USER']->uc['timezone'],
+                'default' => $timezoneService->getUserTimezone(),
             ],
         ],
         'tzdb_version' => [
