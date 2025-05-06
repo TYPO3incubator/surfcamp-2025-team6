@@ -32,16 +32,8 @@ class EventController extends ActionController
 
     public function registrationAction(): ResponseInterface
     {
-        $allEvents = $this->eventRepository->findAll();
-        $registrationsForEvents = [];
-        foreach ($allEvents as $event) {
-            $registration = new Registration();
-            $registration->setEvent($event);
-            $registration->setAppointment($event->getAppointment());
-
-        }
         $this->view->assignMultiple([
-            'events' => $this->eventRepository->findAll()
+            'events' => $this->eventRepository->findByIsOpenForRegistrations()
         ]);
         return $this->htmlResponse();
     }

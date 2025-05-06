@@ -28,5 +28,14 @@ return [
                 'eval' => 'required,trim,email',
             ],
         ],
+        'event' => [
+            'label' => 'Event',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_surfcamp_events_event',
+                'minitems' => 1,
+                'maxitems' => 1,
+            ],
+        ],
     ],
 ];

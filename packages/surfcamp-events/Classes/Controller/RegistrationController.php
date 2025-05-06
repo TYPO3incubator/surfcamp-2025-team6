@@ -23,11 +23,32 @@ class RegistrationController extends ActionController
 
     public function confirmRegistrationAction(Event $event, string $email): ResponseInterface
     {
+        // Check for email validity
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->addFlashMessage(
                 'Please provide a valid email address.',
                 'Invalid email address provided.',
                 ContextualFeedbackSeverity::ERROR
+            );
+            return $this->redirect('registration', 'Event');
+        }
+
+        // Check if maximum capacity isn't reached yet
+        $registeredAttendeeCount = $this->registrationRepository->findAttendeeCountByEvent($event);
+        if ($registeredAttendeeCount >= $event->getMaximumAttendeeCapacity()) {
+            $this->addFlashMessage(
+                'Number of maximum attendees already reached.',
+                'Registration denied',
+                ContextualFeedbackSeverity::WARNING
+            );
+            return $this->redirect('registration', 'Event');
+        }
+
+        // Check if email was already registered for event
+        if ($this->registrationRepository->findEmailAlreadyRegisteredByEvent($event, $email)) {
+            $this->addFlashMessage(
+                'This Email address was already registered.',
+                'Already registered.',
             );
             return $this->redirect('registration', 'Event');
         }
@@ -40,7 +61,6 @@ class RegistrationController extends ActionController
         $this->addFlashMessage(
             'Your registration has been confirmed.',
             'Successful registration.',
-            ContextualFeedbackSeverity::OK
         );
         return $this->redirect('registration', 'Event');
     }
