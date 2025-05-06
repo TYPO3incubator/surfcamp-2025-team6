@@ -115,4 +115,24 @@ class Event extends AbstractDomainObject
     {
         $this->location = $location;
     }
+
+    public function getAppointment(): ?ObjectStorage
+    {
+        return $this->appointment;
+    }
+
+    public function setAppointment(?ObjectStorage $appointment): void
+    {
+        $this->appointment = $appointment;
+    }
+
+    public function getRegistration(): ?ObjectStorage
+    {
+        return $this->registration;
+    }
+
+    public function setRegistration(?ObjectStorage $registration): void
+    {
+        $this->registration = $registration;
+    }
 }

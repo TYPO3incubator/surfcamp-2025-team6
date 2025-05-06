@@ -6,6 +6,8 @@ use AllowDynamicProperties;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
+use TYPO3Incubator\SurfcampEvents\Domain\Model\Registration;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
 
 class EventController extends ActionController
@@ -22,6 +24,22 @@ class EventController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
+        $this->view->assignMultiple([
+            'events' => $this->eventRepository->findAll()
+        ]);
+        return $this->htmlResponse();
+    }
+
+    public function registrationAction(): ResponseInterface
+    {
+        $allEvents = $this->eventRepository->findAll();
+        $registrationsForEvents = [];
+        foreach ($allEvents as $event) {
+            $registration = new Registration();
+            $registration->setEvent($event);
+            $registration->setAppointment($event->getAppointment());
+
+        }
         $this->view->assignMultiple([
             'events' => $this->eventRepository->findAll()
         ]);
