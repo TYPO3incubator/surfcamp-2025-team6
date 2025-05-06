@@ -30,6 +30,22 @@ class EventController extends ActionController
         return $this->htmlResponse();
     }
 
+    public function registrationAction(): ResponseInterface
+    {
+        $allEvents = $this->eventRepository->findAll();
+        $registrationsForEvents = [];
+        foreach ($allEvents as $event) {
+            $registration = new Registration();
+            $registration->setEvent($event);
+            $registration->setAppointment($event->getAppointment());
+
+        }
+        $this->view->assignMultiple([
+            'events' => $this->eventRepository->findAll()
+        ]);
+        return $this->htmlResponse();
+    }
+
     public function detailAction(Event $event): ResponseInterface
     {
         $this->view->assign('event', $event);

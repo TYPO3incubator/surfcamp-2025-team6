@@ -2,6 +2,7 @@
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3Incubator\SurfcampEvents\Controller\EventController;
+use TYPO3Incubator\SurfcampEvents\Controller\RegistrationController;
 use TYPO3Incubator\SurfcampEvents\Form\Element\SelectWithTimezoneValidation;
 use TYPO3Incubator\SurfcampEvents\Controller\RegistrationController;
 
@@ -20,3 +21,11 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][] = [
     'priority' => 50,
     'class' => SelectWithTimezoneValidation::class,
 ];
+
+ExtensionUtility::configurePlugin(
+    'SurfcampEvents',
+    'EventRegistration',
+    [EventController::class => 'registration', RegistrationController::class => 'confirmRegistration'],
+    [EventController::class => 'registration', RegistrationController::class => 'confirmRegistration'],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+);
