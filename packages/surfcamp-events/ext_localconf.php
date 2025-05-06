@@ -16,6 +16,14 @@ ExtensionUtility::configurePlugin(
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
+ExtensionUtility::configurePlugin(
+    'SurfcampEvents',
+    'EventRegistration',
+    [EventController::class => 'registration', RegistrationController::class => 'confirmRegistration'],
+    [EventController::class => 'registration', RegistrationController::class => 'confirmRegistration'],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+);
+
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][] = [
     'nodeName' => 'selectSingleWithTimezoneValidation',
     'priority' => 50,
