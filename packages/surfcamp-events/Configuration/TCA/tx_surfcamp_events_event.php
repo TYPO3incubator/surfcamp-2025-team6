@@ -140,12 +140,14 @@ return [
         ],
         'is_open_for_registrations' => [
             'label' => 'Event accepts registrations',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
             ]
         ],
         'maximum_attendee_capacity' => [
             'label' => 'Maximum Attendee capacity',
+            'displayCond' => 'FIELD:is_open_for_registrations:>:0',
             'config' => [
                 'type' => 'number',
                 'min' => 0
