@@ -5,6 +5,7 @@ namespace TYPO3Incubator\SurfcampEvents\Domain\Repository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class EventRepository extends Repository
@@ -23,4 +24,16 @@ class EventRepository extends Repository
         $this->setDefaultQuerySettings($querySettings);
     }
 
+    public function findByIsOpenForRegistrations(): QueryResultInterface
+    {
+        try {
+            $query = $this->createQuery();
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $query->matching($query->equals('isOpenForRegistrations', true));
+            $result = $query->execute();
+        } catch (\Exception $e) {
+            $result = null;
+        }
+        return $result;
+    }
 }

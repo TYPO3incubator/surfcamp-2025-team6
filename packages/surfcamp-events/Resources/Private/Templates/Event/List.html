@@ -1,1 +1,6 @@
-<f:debug>{events}</f:debug>
+<f:for each="{events}" as="event">
+    <f:link.action action="detail" controller="Event" arguments="{event: event}">
+        <h4>{event.title}</h4>
+    </f:link.action>
+    <small>{event.description -> f:format.crop(maxCharacters: 50)}</small>
+</f:for>
