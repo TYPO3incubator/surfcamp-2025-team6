@@ -1,3 +1,13 @@
+<f:flashMessages as="flashMessages">
+    <dl class="messages">
+        <f:for each="{flashMessages}" as="flashMessage">
+            <div class="alert alert-primary" role="alert">
+                <h3 class="alert-heading">{flashMessage.message}</h3>
+            </div>
+        </f:for>
+    </dl>
+</f:flashMessages>
+
 <h3>{event.title}</h3>
 <small>
     <f:if condition="{event.startDateTime}">

@@ -28,7 +28,7 @@ final class RegistrationController extends ActionController
                 return $this->redirect(
                     'detail',
                     'Event',
-                    '',
+                    'SurfcampEvents',
                     ["event" => $event]
                 );
             case RegistrationStatus::STATUS_MAX_CAPACITY_REACHED:
@@ -40,7 +40,7 @@ final class RegistrationController extends ActionController
                 return $this->redirect(
                     'detail',
                     'Event',
-                    '',
+                    'SurfcampEvents',
                     ["event" => $event]
                 );
             case RegistrationStatus::STATUS_ALREADY_REGISTERED:
@@ -51,7 +51,7 @@ final class RegistrationController extends ActionController
                 return $this->redirect(
                     'detail',
                     'Event',
-                    '',
+                    'SurfcampEvents',
                     ["event" => $event]
                 );
             default:
@@ -62,7 +62,7 @@ final class RegistrationController extends ActionController
                 return $this->redirect(
                     'detail',
                     'Event',
-                    '',
+                    'SurfcampEvents',
                     ["event" => $event]
                 );
         }
