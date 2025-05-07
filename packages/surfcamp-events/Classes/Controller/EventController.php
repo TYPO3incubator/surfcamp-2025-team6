@@ -8,14 +8,13 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
 
-class EventController extends ActionController
+final class EventController extends ActionController
 {
 
     public function __construct(
         private readonly EventRepository $eventRepository,
     )
-    {
-    }
+    {}
     /**
      * The List Action
      * @return ResponseInterface
