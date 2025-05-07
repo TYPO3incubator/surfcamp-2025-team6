@@ -24,14 +24,19 @@
     <div
         id="map"
         style="height: 400px"
-        data-events="{locations -> f:format.json()}"
+        data-locations="{locations -> f:format.json()}"
     ></div>
 
-    <script>
-        var eventLocations = <f:format.raw>{locations -> f:format.json()}</f:format.raw>;
-    </script>
+    <!-- <script>
+        var eventLocations2 = <f:format.raw>{locations -> f:format.json()}</f:format.raw>;
+    </script> -->
 
     <script>
+        const element = document.getElementById("map");
+        const eventLocations = JSON.parse(
+            element.getAttribute("data-locations")
+        );
+
         var defaultLat = 40.14465498740908;
         var defaultLng = -2.822603099553335;
         var zoomLevel = 8;
