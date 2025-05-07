@@ -7,7 +7,7 @@ use TYPO3Incubator\SurfcampEvents\Domain\Model\Registration;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\RegistrationRepository;
 use TYPO3Incubator\SurfcampEvents\Enumeration\RegistrationStatus;
 
-class RegistrationService
+final class RegistrationService
 {
     public function __construct(
         protected RegistrationRepository $registrationRepository,

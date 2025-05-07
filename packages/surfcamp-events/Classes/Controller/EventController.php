@@ -10,14 +10,13 @@ use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Registration;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
 
-class EventController extends ActionController
+final class EventController extends ActionController
 {
 
     public function __construct(
         private readonly EventRepository $eventRepository,
     )
-    {
-    }
+    {}
     /**
      * The List Action
      * @return ResponseInterface

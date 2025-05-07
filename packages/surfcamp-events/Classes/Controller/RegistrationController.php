@@ -9,7 +9,7 @@ use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
 use TYPO3Incubator\SurfcampEvents\Enumeration\RegistrationStatus;
 use TYPO3Incubator\SurfcampEvents\Service\RegistrationService;
 
-class RegistrationController extends ActionController
+final class RegistrationController extends ActionController
 {
     public function __construct(
         protected RegistrationService $registrationService,
