@@ -7,7 +7,8 @@ namespace TYPO3Incubator\SurfcampEvents\Service;
 class TimezoneService
 {
     public function __construct(
-       private GeolocationApiService $geolocationApiService
+        private GeolocationApiService $geolocationApiService,
+        private TimezoneApiService $timezoneApiService
     ) {}
 
     public function getTimezoneVersion(): string
@@ -18,8 +19,17 @@ class TimezoneService
     public function getUserTimezone(): ?string
     {
         $userData = $this->geolocationApiService->fetchUserData();
-        if (array_key_exists('timezone', $userData)) {
+        if ($userData && array_key_exists('timezone', $userData)) {
             return $userData['timezone'];
+        }
+        return null;
+    }
+
+    public function getTimezoneByCoords(float $lat, float $long): ?string
+    {
+        $timezoneData = $this->timezoneApiService->getByCoordinates($lat, $long);
+        if ($timezoneData && array_key_exists('timeZone', $timezoneData)) {
+            return $timezoneData['timeZone'];
         }
         return null;
     }

@@ -82,5 +82,12 @@ return [
                 'format' => 'decimal',
             ],
         ],
+        'timezone' => [
+            'label' => 'Timezone',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
+            ],
+        ],
     ],
 ];
