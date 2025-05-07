@@ -50,6 +50,7 @@ class EventController extends ActionController
 
         $this->view->assignMultiple([
             'locations' => $locations,
+            'events' => $events,
         ]);
 
         return $this->htmlResponse();
