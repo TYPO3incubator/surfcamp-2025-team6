@@ -1,0 +1,28 @@
+<h3>{event.title}</h3>
+<small>
+    <f:if condition="{event.startDateTime}">
+        {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}
+    </f:if>
+    <f:if condition="{event.endDateTime}">
+        - {event.endDateTime -> f:format.date(format: 'd.m.Y g:i a')}
+    </f:if>
+</small>
+<p>{event.description}</p>
+<h4>Sign Up</h4>
+<f:form
+    action="processRegistration"
+    controller="Registration"
+    objectName="event"
+    object="{event}"
+    method="post">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <f:form.textfield
+            name="email"
+            id="email"
+            type="email"
+            class="form-control"
+            placeholder="name@example.com"></f:form.textfield>
+    </div>
+    <f:form.submit value="Submit registration" class="btn btn-primary"></f:form.submit>
+</f:form>

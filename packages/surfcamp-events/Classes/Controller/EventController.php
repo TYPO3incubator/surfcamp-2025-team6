@@ -30,11 +30,9 @@ class EventController extends ActionController
         return $this->htmlResponse();
     }
 
-    public function registrationAction(): ResponseInterface
+    public function detailAction(Event $event): ResponseInterface
     {
-        $this->view->assignMultiple([
-            'events' => $this->eventRepository->findByIsOpenForRegistrations()
-        ]);
+        $this->view->assign('event', $event);
         return $this->htmlResponse();
     }
 }
