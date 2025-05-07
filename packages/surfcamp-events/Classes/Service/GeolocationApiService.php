@@ -10,7 +10,7 @@ class GeolocationApiService
 
     public function fetchUserData(): ?array
     {
-        if($ip = $this->getUserIp()) {
+        if ($ip = $this->getUserIp()) {
             return $this->fetchDataByIp($ip);
         }
         return null;
