@@ -1,7 +1,9 @@
+import Notification from "@typo3/backend/notification.js";
+
 document.querySelectorAll('select').forEach((select) => {
     if (select.dataset?.selectTimezoneValidation) {
         select.addEventListener('change', () => {
-            console.log('Custom selectSingleWithJs change event:', select.value);
+            Notification.warning('Warning', 'Make sure the selected timezone is correct.');
         });
     }
 });
