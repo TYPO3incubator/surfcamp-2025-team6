@@ -27,4 +27,50 @@ class EventController extends ActionController
         ]);
         return $this->htmlResponse();
     }
+
+    /**
+     * Get the Events Locations
+     * @return ResponseInterface
+     */
+    public function locationsMapAction(): ResponseInterface
+    {
+        $events = $this->eventRepository->findAll();
+
+        $locations = [];
+        foreach ($events as $event) {
+            $location = $event->getLocation();
+            if ($location !== null && $location->getLatitude() !== null && $location->getLongitude() !== null) {
+                $locations[] = [
+                    'lat' => $location->getLatitude(),
+                    'lng' => $location->getLongitude(),
+                    'title' => $event->getTitle()
+                ];
+            }
+        }
+
+        $this->view->assignMultiple([
+            'locations' => $locations,
+        ]);
+
+        return $this->htmlResponse();
+    }
+
+    // /**
+    //  * The List Action
+    //  * @return ResponseInterface
+    //  */
+    // public function listByLocationAction(float $latitude = null, float $longitude = null, float $radiusKm = 10.0): ResponseInterface
+    // {
+
+    //     if ($lat === null || $lng === null) {
+    //         $events = $this->eventRepository->findAll();
+    //     } else {
+    //         $events = $this->eventRepository->findByLocation($lat, $lng, $radiusKm);
+    //     }
+
+    //     // $events = $this->eventRepository->findByLocation($latitude, $longitude, $radiusKm);
+    //     $this->view->assign('events', $events);
+
+    //     return $this->htmlResponse();
+    // }
 }

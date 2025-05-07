@@ -1,0 +1,63 @@
+<f:layout name="Default" />
+
+<!-- <f:debug>{locations}</f:debug> -->
+
+<f:section name="main">
+    <h2>Events</h2>
+
+    <!-- Include Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    />
+
+    <!-- Include Leaflet JS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+
+    <!-- Map container -->
+    <div
+        id="map"
+        style="height: 400px"
+        data-events="{locations -> f:format.json()}"
+    ></div>
+
+    <script>
+        var eventLocations = <f:format.raw>{locations -> f:format.json()}</f:format.raw>;
+    </script>
+
+    <script>
+        var defaultLat = 40.14465498740908;
+        var defaultLng = -2.822603099553335;
+        var zoomLevel = 8;
+
+        if (eventLocations.length > 0) {
+            defaultLat = eventLocations[0].lat;
+            defaultLng = eventLocations[0].lng;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Center of the map (first event, or default)
+            const map = L.map("map").setView(
+                [defaultLat, defaultLng],
+                zoomLevel
+            );
+
+            // Add OpenStreetMap tiles
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "&copy; OpenStreetMap contributors",
+            }).addTo(map);
+
+            eventLocations.forEach(function (event) {
+                L.marker([event.lat, event.lng])
+                    .addTo(map)
+                    .bindPopup(event.title);
+            });
+        });
+    </script>
+</f:section>
