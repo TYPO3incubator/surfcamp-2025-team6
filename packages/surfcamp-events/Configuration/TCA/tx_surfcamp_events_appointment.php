@@ -81,9 +81,13 @@ return [
         ],
         'location' => [
             'label' => 'Location',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
-                'renderType' => 'selectSingle',
+                'renderType' => 'selectSingleWithTimezoneValidation',
+                'items' => array(
+                    array("-- Please select a location --", 0),
+                ),
                 'foreign_table' => 'tx_surfcamp_events_location',
             ],
         ],

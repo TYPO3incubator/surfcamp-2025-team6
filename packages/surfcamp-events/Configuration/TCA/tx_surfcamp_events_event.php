@@ -120,6 +120,7 @@ return [
         ],
         'location' => [
             'label' => 'Location',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingleWithTimezoneValidation',
