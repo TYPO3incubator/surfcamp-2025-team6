@@ -2,10 +2,14 @@ window.onload = function() {
     const timezone = getClientTimezone();
 
     const eventIds = getEventIds();
-    fetchEventDates(eventIds, timezone);
+    if (eventIds.length > 0) {
+        fetchDates('events', eventIds, timezone);
+    }
 
     const appointmentIds = getAppointmentIds();
-    fetchAppointmentDates(appointmentIds, timezone);
+    if (appointmentIds.length > 0) {
+        fetchDates('appointments', appointmentIds, timezone);
+    }
 };
 
 function getEventIds() {
@@ -34,8 +38,8 @@ function getClientTimezone() {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
 
-async function fetchEventDates(ids, timezone) {
-    const url = '/api/surfcamp-events/get-time-for-events?ids=' + ids.join() + '&timezone=' + timezone;
+async function fetchDates(type, ids, timezone) {
+    const url = '/api/surfcamp-events/get-time-for-' + type + '?ids=' + ids.join() + '&timezone=' + timezone;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -43,34 +47,41 @@ async function fetchEventDates(ids, timezone) {
         }
 
         const json = await response.json();
-        updateEventsDateTime(json);
+        switch (type) {
+            case 'events':
+                updateDateTime('.event', json);
+                break;
+            case 'appointments':
+                updateDateTime('.appointment', json);
+                break;
+        }
     } catch (error) {
         console.error(error.message);
     }
 }
 
-function updateEventsDateTime(data) {
-    const events = document.querySelectorAll('.event');
-    events.forEach(function (eventElement) {
-        if (!eventElement.dataset.id) {
+function updateDateTime(selector, data) {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(function (element) {
+        if (!element.dataset.id) {
             return;
         }
 
-        if (!data[eventElement.dataset.id]) {
+        if (!data[element.dataset.id]) {
             return;
         }
 
-        const eventData = data[eventElement.dataset.id];
+        const elementData = data[element.dataset.id];
 
-        if(eventData.startDate) {
-            let dateTime = new Date(eventData.startDate);
-            const startDateElement = eventElement.querySelector('.event-start-date');
+        if(elementData.startDate) {
+            let dateTime = new Date(elementData.startDate);
+            const startDateElement = element.querySelector('.event-start-date');
             startDateElement.innerHTML = formatDate(dateTime);
         }
 
-        if(eventData.endDate) {
-            let dateTime = new Date(eventData.endDate);
-            const endDateElement = eventElement.querySelector('.event-end-date');
+        if(elementData.endDate) {
+            let dateTime = new Date(elementData.endDate);
+            const endDateElement = element.querySelector('.event-end-date');
             endDateElement.innerHTML = formatDate(dateTime);
         }
     });
@@ -89,33 +100,6 @@ async function fetchAppointmentDates(ids, timezone) {
     } catch (error) {
         console.error(error.message);
     }
-}
-
-function updateAppointmentsDateTime(data) {
-    const appointments = document.querySelectorAll('.appointment');
-    appointments.forEach(function (appointmentElement) {
-        if (!appointmentElement.dataset.id) {
-            return;
-        }
-
-        if (!data[appointmentElement.dataset.id]) {
-            return;
-        }
-
-        const appointmentData = data[appointmentElement.dataset.id];
-
-        if(appointmentData.startDate) {
-            let dateTime = new Date(appointmentData.startDate);
-            const startDateElement = appointmentElement.querySelector('.event-start-date');
-            startDateElement.innerHTML = formatDate(dateTime);
-        }
-
-        if(appointmentData.endDate) {
-            let dateTime = new Date(appointmentData.endDate);
-            const endDateElement = appointmentElement.querySelector('.event-end-date');
-            endDateElement.innerHTML = formatDate(dateTime);
-        }
-    });
 }
 
 function formatDate(datetime) {
