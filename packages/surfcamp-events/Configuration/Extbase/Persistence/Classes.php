@@ -12,8 +12,17 @@ return [
             'start_date_time' => [
                 'fieldName' => 'start_date_time',
             ],
+            'start_date_time_utc' => [
+                'fieldName' => 'start_date_time_utc',
+            ],
             'end_date_time' => [
                 'fieldName' => 'end_date_time',
+            ],
+            'end_date_time_utc' => [
+                'fieldName' => 'end_date_time_utc',
+            ],
+            'tzdb_version' => [
+                'fieldName' => 'tzdb_version',
             ],
             'is_open_for_registrations' => [
                 'fieldName' => 'is_open_for_registrations',

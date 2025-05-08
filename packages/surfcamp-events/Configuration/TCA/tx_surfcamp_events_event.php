@@ -73,24 +73,28 @@ return [
             'label' => 'Start Date & Time',
             'config' => [
                 'type' => 'datetime',
+                'dbType' => 'datetime',
             ],
         ],
         'start_date_time_utc' => [
             'label' => 'Start Date & Time [UTC]',
             'config' => [
                 'type' => 'datetime',
+                'dbType' => 'datetime',
             ],
         ],
         'end_date_time' => [
             'label' => 'End Date & Time',
             'config' => [
                 'type' => 'datetime',
+                'dbType' => 'datetime',
             ],
         ],
         'end_date_time_utc' => [
             'label' => 'End Date & Time [UTC]',
             'config' => [
                 'type' => 'datetime',
+                'dbType' => 'datetime',
             ],
         ],
         'timezone' => [
