@@ -19,7 +19,7 @@
     </f:if>
 </small>
 <p>{event.description}</p>
-<f:if condition="{event.isOpenForRegistrations}">
+<f:if condition="{event.isOpenForRegistrations} && !{isInPast}">
     <h4>Sign Up</h4>
     <f:form
         action="processRegistration"

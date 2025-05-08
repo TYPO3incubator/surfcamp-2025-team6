@@ -2,6 +2,7 @@
 
 namespace TYPO3Incubator\SurfcampEvents\Service;
 
+use Cassandra\Date;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Registration;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\RegistrationRepository;
@@ -32,7 +33,10 @@ final class RegistrationService
             return RegistrationStatus::STATUS_ALREADY_REGISTERED;
         }
 
-        // TODO: Check if Event is in the past
+        // Check if Event is in the past
+        if ($event->getEndDateTime() < (new \DateTime())->getTimestamp()) {
+            return RegistrationStatus::STATUS_EVENT_IN_PAST;
+        }
 
         $this->persistNewRegistration($event, $email);
         return RegistrationStatus::STATUS_SUCCESSFUL;
