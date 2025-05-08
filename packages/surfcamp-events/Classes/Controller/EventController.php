@@ -31,7 +31,10 @@ final class EventController extends ActionController
 
     public function detailAction(Event $event): ResponseInterface
     {
-        $this->view->assign('event', $event);
+        $this->view->assignMultiple([
+            'event' => $event,
+            'isInPast' => $event->getEndDateTime() != 0 && $event->getEndDateTime() < (new \DateTime())->getTimestamp()
+        ]);
         return $this->htmlResponse();
     }
 }

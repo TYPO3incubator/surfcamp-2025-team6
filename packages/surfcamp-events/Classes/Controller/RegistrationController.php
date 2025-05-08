@@ -23,7 +23,7 @@ final class RegistrationController extends ActionController
                 $this->addFlashMessage(
                     'Please provide a valid email address.',
                     'Invalid email address provided.',
-                    ContextualFeedbackSeverity::ERROR
+                    ContextualFeedbackSeverity::WARNING
                 );
                 return $this->redirect(
                     'detail',
@@ -47,6 +47,19 @@ final class RegistrationController extends ActionController
                 $this->addFlashMessage(
                     'This Email address was already registered.',
                     'Already registered.',
+                    ContextualFeedbackSeverity::WARNING
+                );
+                return $this->redirect(
+                    'detail',
+                    'Event',
+                    'SurfcampEvents',
+                    ["event" => $event]
+                );
+                case RegistrationStatus::STATUS_EVENT_IN_PAST:
+                $this->addFlashMessage(
+                    'This Event is in the past and does not accept registrations anymore.',
+                    'Event already over',
+                    ContextualFeedbackSeverity::WARNING
                 );
                 return $this->redirect(
                     'detail',
