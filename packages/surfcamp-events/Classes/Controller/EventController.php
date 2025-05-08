@@ -34,7 +34,7 @@ class EventController extends ActionController
      */
     public function locationsMapAction(): ResponseInterface
     {
-        $events = $this->eventRepository->findAll();
+        $events = $this->eventRepository->findUpcomingEvents();
 
         $locations = [];
         foreach ($events as $event) {
