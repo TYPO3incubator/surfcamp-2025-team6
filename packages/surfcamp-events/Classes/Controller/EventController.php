@@ -78,9 +78,18 @@ final class EventController extends ActionController
      */
     public function timelineAction(): ResponseInterface
     {
-        $this->view->assignMultiple([
-            'events' => $this->eventRepository->findUpcomingEvents()
+
+        $query = $this->eventRepository->createQuery();
+        $query->setOrderings([
+            'start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
         ]);
+
+        $events = $query->execute();
+
+        $this->view->assignMultiple([
+            'events' => $events
+        ]);
+    
         return $this->htmlResponse();
     }
 }
