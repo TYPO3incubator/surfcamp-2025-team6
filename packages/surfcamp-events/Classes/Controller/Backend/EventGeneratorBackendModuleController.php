@@ -48,7 +48,7 @@ final class EventGeneratorBackendModuleController extends ActionController
      */
     public function indexAction(): ResponseInterface
     {
-        // $this->commonViewPreperation();
+        $this->commonViewPreperation();
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
 
         $currentPage = $this->request->hasArgument('currentPageNumber')
@@ -83,11 +83,26 @@ final class EventGeneratorBackendModuleController extends ActionController
         return $moduleTemplate->renderResponse('Backend/EventGenerator/Index');
     }
 
+    /**
+     * @return ResponseInterface
+     * @throws RouteNotFoundException
+     */
     public function generateAppointmentsAction(): ResponseInterface
     {
         $this->commonViewPreperation();
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->assign('someVar', 'someContent');
+        if ($this->request->hasArgument('event')) {
+            $moduleTemplate->assignMultiple([
+                'event' => $this->eventRepository->findByUid((int) $this->request->getArguments()['event']),
+                'events' => [
+                    'newPid' => 1,
+                    'newTable'=> 'tx_surfcamp_events_event',
+                    'newReturn' => $this->backendUriBuilder->buildUriFromRoute('events_eventsgenerator'),
+                ],
+            ]);
+        } else {
+            return $this->redirectToUri($this->backendUriBuilder->buildUriFromRoute('events_eventsgenerator'));
+        }
         return  $moduleTemplate->renderResponse('Backend/EventGenerator/GenerateAppointments');
     }
 
@@ -135,4 +150,11 @@ final class EventGeneratorBackendModuleController extends ActionController
         }
         return  $moduleTemplate->renderResponse('Backend/EventGenerator/RegistrationsOverview');
     }
+
+    public function generateRegistrationsAction(): ResponseInterface
+    {
+        return $this->htmlResponse('There are ');
+
+    }
+
 }

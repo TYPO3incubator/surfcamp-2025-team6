@@ -46,12 +46,12 @@
                                     <f:if condition="{event.eventType} !== 'standard'">
                                         <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                             <core:icon identifier="content-clock" size="small"/>
-                                            <span>{event.appointment -> f:count()} {f:if condition: '{event.appointment -> f:count()} == 1', then: 'Appointment', else: 'Appointments'}}</span>
+                                            <span>{event.appointment -> f:count()} {f:if condition:'{event.appointment -> f:count()} == 1', then: 'Appointment', else: 'Appointments'}  }</span>
                                         </span>
                                     </f:if>
                                     <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                         <core:icon identifier="actions-user"/>
-                                        <span>{event.appointment -> f:count()} {f:if condition: '{event.appointment -> f:count()} == 1', then: 'Registration', else: 'Registrations'}}</span>
+                                        <span>{event.appointment -> f:count()} {f:if(condition:'{event.appointment -> f:count()} == 1', then: 'Registration', else: 'Registrations'}}</span>
                                     </span>
                                     <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                         <core:icon identifier="content-map" size="small"/>
@@ -62,16 +62,6 @@
                                     </span>
                                 </div>
                             </div>
-                            <f:comment>
-                                <f:if condition="{event.description}">
-                                    <f:then>
-                                        <p class="mt-3">{event.description -> f:sanitize.html()}</p>
-                                    </f:then>
-                                    <f:else>
-                                        <p class="mt-3">Event has no Description! Please fill in some Information.</p>
-                                    </f:else>
-                                </f:if>
-                            </f:comment>
                         </div>
                     </div>
                 </div>
