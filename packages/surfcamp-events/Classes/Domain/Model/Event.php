@@ -194,7 +194,7 @@ class Event extends AbstractDomainObject
         $this->start_date_time_utc = $start_date_time_utc;
     }
 
-    public function getTimezone(): int
+    public function getTimezone(): string
     {
         return $this->timezone;
     }
