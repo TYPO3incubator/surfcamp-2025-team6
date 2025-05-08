@@ -19,6 +19,11 @@
     </f:if>
 </small>
 <p>{event.description}</p>
+
+<f:for each="{event.appointment}" as="appointment">
+    <p>a</p>
+</f:for>
+
 <f:if condition="{event.isOpenForRegistrations} && !{isInPast}">
     <h4>Sign Up</h4>
     <f:form
