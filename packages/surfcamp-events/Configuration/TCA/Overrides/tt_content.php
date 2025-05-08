@@ -18,15 +18,22 @@ ExtensionUtility::registerPlugin(
     'SurfcampEvents',
     'EventLocationsMap',
     'Events by Location on Map',
-    'content-pin',
+    'content-map',
     'surfcamp-events'
 );
-
 
 ExtensionUtility::registerPlugin(
     'SurfcampEvents',
     'EventRegistration',
     'Registration for Event',
     'form-fieldset',
+    'surfcamp-events'
+);
+
+ExtensionUtility::registerPlugin(
+    'SurfcampEvents',
+    'EventTimeline',
+    'Events on Timeline',
+    'content-timeline',
     'surfcamp-events'
 );

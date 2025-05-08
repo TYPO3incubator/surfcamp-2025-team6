@@ -1,0 +1,49 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+    <!-- <f:asset.css identifier="timeline-css" href="EXT:surfcamp_events/Resources/Public/Css/timeline.css"/> -->
+
+    <div class="container py-5">
+        <div class="timeline">
+            <div class="row g-4">
+                <div class="container my-5">
+                    <h2 class="text-center mb-4 h2">Timeline</h2>
+                    <ul class="timeline">
+                        <f:for each="{events}" as="event" iteration="i">
+                        
+                        <li class="timeline-item <f:if condition="{i.cycle} % 2 == 1">left<f:else>right</f:else></f:if>"">
+                            <div class="timeline-point <f:if condition='{i.cycle} % 2 == 1'>point-left<f:else>point-right</f:else></f:if>"></div>
+                            <div class="timeline-content">
+                                
+                                <h5 class="d-flex gap-3">
+                                <f:link.action
+                                    action="detail"
+                                    controller="Event"
+                                    arguments="{event: event}"
+                                    pageUid="{detailPageUid}"
+                                >
+                                    {event.title}
+                                </f:link.action>
+
+                                <span class="rounded badge text-bg-secondary w-inherit h-inherit py-1 px-2 fs-6">
+                                    <f:format.case mode="upper">{event.eventType}</f:format.case>
+                                </span>
+
+                            </h5>
+                                <small>
+                                    🕓 Start: {event.startDateTime -> f:format.date(format:
+                                    'd.m.Y g:i a')} </br>
+                                    🕡 End: {event.endDateTime ->
+                                    f:format.date(format: 'd.m.Y g:i a')}
+                                </small>
+                            </div>
+                        </li>
+                    </f:for>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</f:section>

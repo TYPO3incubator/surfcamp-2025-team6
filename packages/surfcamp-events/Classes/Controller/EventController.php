@@ -71,4 +71,16 @@ final class EventController extends ActionController
 
         return $this->htmlResponse();
     }
+
+     /**
+     * The List Action
+     * @return ResponseInterface
+     */
+    public function timelineAction(): ResponseInterface
+    {
+        $this->view->assignMultiple([
+            'events' => $this->eventRepository->findUpcomingEvents()
+        ]);
+        return $this->htmlResponse();
+    }
 }
