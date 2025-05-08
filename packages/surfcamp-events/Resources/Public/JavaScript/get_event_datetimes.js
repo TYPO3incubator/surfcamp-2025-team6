@@ -1,7 +1,15 @@
 window.onload = function() {
-    const ids = getEventIds();
     const timezone = getClientTimezone();
-    fetchEventDates(ids, timezone);
+
+    const eventIds = getEventIds();
+    if (eventIds.length > 0) {
+        fetchDates('events', eventIds, timezone);
+    }
+
+    const appointmentIds = getAppointmentIds();
+    if (appointmentIds.length > 0) {
+        fetchDates('appointments', appointmentIds, timezone);
+    }
 };
 
 function getEventIds() {
@@ -15,12 +23,23 @@ function getEventIds() {
     return eventIds;
 }
 
+function getAppointmentIds() {
+    const appointments = document.querySelectorAll('.appointment');
+    let appointmentIds = [];
+    appointments.forEach(function (appointment) {
+        if (appointment.dataset.id) {
+            appointmentIds.push(appointment.dataset.id);
+        }
+    })
+    return appointmentIds;
+}
+
 function getClientTimezone() {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
 
-async function fetchEventDates(ids, timezone) {
-    const url = '/api/surfcamp-events/get-time-for-events?ids=' + ids.join() + '&timezone=' + timezone;
+async function fetchDates(type, ids, timezone) {
+    const url = '/api/surfcamp-events/get-time-for-' + type + '?ids=' + ids.join() + '&timezone=' + timezone;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -28,37 +47,59 @@ async function fetchEventDates(ids, timezone) {
         }
 
         const json = await response.json();
-        updateEventsDateTime(json);
+        switch (type) {
+            case 'events':
+                updateDateTime('.event', json);
+                break;
+            case 'appointments':
+                updateDateTime('.appointment', json);
+                break;
+        }
     } catch (error) {
         console.error(error.message);
     }
 }
 
-function updateEventsDateTime(data) {
-    const events = document.querySelectorAll('.event');
-    events.forEach(function (eventElement) {
-        if (!eventElement.dataset.id) {
+function updateDateTime(selector, data) {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(function (element) {
+        if (!element.dataset.id) {
             return;
         }
 
-        if (!data[eventElement.dataset.id]) {
+        if (!data[element.dataset.id]) {
             return;
         }
 
-        const eventData = data[eventElement.dataset.id];
+        const elementData = data[element.dataset.id];
 
-        if(eventData.startDate) {
-            let dateTime = new Date(eventData.startDate);
-            const startDateElement = eventElement.querySelector('.event-start-date');
+        if(elementData.startDate) {
+            let dateTime = new Date(elementData.startDate);
+            const startDateElement = element.querySelector('.event-start-date');
             startDateElement.innerHTML = formatDate(dateTime);
         }
 
-        if(eventData.endDate) {
-            let dateTime = new Date(eventData.endDate);
-            const endDateElement = eventElement.querySelector('.event-end-date');
+        if(elementData.endDate) {
+            let dateTime = new Date(elementData.endDate);
+            const endDateElement = element.querySelector('.event-end-date');
             endDateElement.innerHTML = formatDate(dateTime);
         }
     });
+}
+
+async function fetchAppointmentDates(ids, timezone) {
+    const url = '/api/surfcamp-events/get-time-for-appointments?ids=' + ids.join() + '&timezone=' + timezone;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        updateAppointmentsDateTime(json);
+    } catch (error) {
+        console.error(error.message);
+    }
 }
 
 function formatDate(datetime) {
