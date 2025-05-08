@@ -24,8 +24,16 @@ return [
         'email' => [
             'label' => 'Email',
             'config' => [
-                'type' => 'input',
-                'eval' => 'required,trim,email',
+                'type' => 'email',
+            ],
+        ],
+        'event' => [
+            'label' => 'Event',
+            'config' => [
+                'type' => 'passthrough',
+                // 'foreign_table' => 'tx_surfcamp_events_event',
+                // 'minitems' => 1,
+                // 'maxitems' => 1,
             ],
         ],
     ],

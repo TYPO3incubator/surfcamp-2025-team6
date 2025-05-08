@@ -14,6 +14,9 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,description',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
     ],
     'interface' => [

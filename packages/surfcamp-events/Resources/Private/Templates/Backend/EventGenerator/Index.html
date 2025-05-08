@@ -11,9 +11,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Events Management</h1>
+                <h1>Event Management</h1>
                 <p>Generate Appointments for your Events</p>
-                <be:link.newRecord class="btn btn-info" table="{newEventTable}" returnUrl="{newEventReturn}" pid="{newEventPid}">
+                <be:link.newRecord class="btn btn-info" table="{events.newTable}" returnUrl="{events.newReturn}" pid="{events.newPid}">
                     <core:icon identifier="actions-placeholder-add" size="small" />
                     <span>Neues Event erstellen</span>
                 </be:link.newRecord>
@@ -25,24 +25,68 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="events mt-4">
+                <div class="events d-flex flex-column mt-4">
                     <div class="row">
                         <div class="col-12">
-                            <h3 class="mb-3">Events ({events -> f:count()})</h3>
+                            <h3 class="mb-3">Events ({events.count})</h3>
                         </div>
-                        <f:for each="{events}" as="event">
-                            <div class="col-md-4">
-                                <div class="card shadow-none rounded-0">
-                                    <div class="card-body pb-3">
-                                        <h3>{event.title}</h3>
-                                        <div class="d-flex flex-wrap gap-1">
-                                            <span class="badge badge-secondary text-capitalize">{event.eventType}</span>
-                                            <f:if condition="{event.startDateTime} > 0">
-                                                <span class="badge badge-beta">Start: {event.startDateTime -> f:format.date()}</span>
-                                            </f:if>
-                                            <f:if condition="{event.endDateTime} > 0">
-                                                <span class="badge badge-beta">End: {event.endDateTime -> f:format.date()}</span>
-                                            </f:if>
+                        <div class="col-12">
+                            <f:form class="d-flex flex-row mb-4" method="POST" object="searchForm" action="{f:uri.action(action:'index')}">
+                                <f:form.textfield name="search" type="search" value="{events.search}" class="form-control flex-grow-0" placeholder="Search for an Event by Title" />
+                            </f:form>
+                        </div>
+                        <f:for each="{events.paginator.paginatedItems}" as="event">
+                            <div class="col-12 col-sm-6 col-md-4 col-xl-4 mb-3">
+                                <div class="card shadow-none rounded-0 h-100">
+                                    <div class="card-body flex-grow-0 pb-3">
+                                        <h3 class="card-title mb-2">{event.title}</h3>
+                                        <div class="d-flex flex-column flex-wrap gap-1 mt-2">
+                                            <div class="d-flex flex-wrap gap-1">
+                                                <f:if condition="{event.startDateTime} > 0">
+                                                    <f:then>
+                                                        <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-beta">Start: {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}</span>
+                                                    </f:then>
+                                                    <f:else>
+                                                        <span class="badge badge-danger">Start: No Start-Date!</span>
+                                                    </f:else>
+                                                </f:if>
+                                                <f:if condition="{event.endDateTime} > 0">
+                                                    <f:then>
+                                                        <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-beta">End: {event.endDateTime -> f:format.date(format: 'd.m.Y g:i a')}</span>
+                                                    </f:then>
+                                                    <f:else>
+                                                        <span class="badge badge-danger">End: No End-Date!</span>
+                                                    </f:else>
+                                                </f:if>
+                                            </div>
+                                            <div class="d-flex flex-wrap gap-1">
+                                                <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                                    <core:icon identifier="actions-calendar-alternative" />
+                                                    <span>{event.eventType -> f:format.case(mode: 'capital')}</span>
+                                                </span>
+                                                <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                                    <core:icon identifier="actions-unlock" />
+                                                    <span>Registration</span>
+                                                </span>
+                                                <f:if condition="{event.eventType} !== 'standard'">
+                                                <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                                    <core:icon identifier="content-clock" size="small" />
+                                                    <span>10 Appointments</span>
+                                                </span>
+                                                </f:if>
+                                                <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                                    <core:icon identifier="actions-user" />
+                                                    <span>10 Registrations</span>
+                                                </span>
+
+                                                <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                                    <core:icon identifier="content-map" size="small" />
+                                                    <f:if condition="{event.location}">
+                                                        <f:then><span>{event.location.name}</span></f:then>
+                                                        <f:else><span>No Location!</span></f:else>
+                                                    </f:if>
+                                                </span>
+                                            </div>
                                         </div>
                                         <f:comment>
                                             <f:if condition="{event.description}">
@@ -55,26 +99,29 @@
                                             </f:if>
                                         </f:comment>
                                     </div>
-                                    <div class="card-footer" style="background-color: #dddddd;">
+                                    <div class="card-footer flex-grow-1" style="background-color: #dddddd;">
                                         <div class="actions d-block w-full">
-                                            <p class="mb-2"><strong>Actions</strong></p>
                                             <div class="row">
                                                 <div class="col-6 d-flex flex-column align-items-start justify-content-start gap-2">
-                                                    <be:link.editRecord class="btn btn-link" uid="{event.uid}" table="{newEventTable}" returnUrl="{newEventReturn}">
+                                                    <be:link.editRecord class="btn btn-link" uid="{event.uid}" table="{events.newTable}" returnUrl="{events.newReturn}">
                                                         <core:icon identifier="actions-document-edit" size="small" />
                                                         <span>Edit Event</span>
                                                     </be:link.editRecord>
-                                                    <f:link.action type="button" disabled="disabled" action="generateAppointments" arguments="{event: event}" class="btn btn-link">
-                                                        <core:icon identifier="actions-form-insert-in" size="small" />
-                                                        <span>Generate Appointments</span>
-                                                    </f:link.action>
+                                                    <f:if condition="{event.eventType} !== 'standard'">
+                                                        <f:link.action type="button" disabled="disabled" action="generateAppointments" arguments="{event: event}" class="btn btn-link">
+                                                            <core:icon identifier="actions-form-insert-in" size="small" />
+                                                            <span>Generate Appointments</span>
+                                                        </f:link.action>
+                                                    </f:if>
                                                 </div>
                                                 <div class="col-6 d-flex flex-column align-items-start justify-content-start gap-2">
-                                                    <f:link.action action="appointmentsOverview" arguments="{event: event}" class="btn btn-link">
-                                                        <core:icon identifier="actions-list" size="small" />
-                                                        <span>Appointments Overview</span>
-                                                    </f:link.action>
-                                                    <f:link.action action="registrationsOverview" arguments="{event: event}" class="btn btn-link">
+                                                    <f:if condition="{event.eventType} !== 'standard'">
+                                                        <f:link.action action="appointmentsOverview" arguments="{event: event}" class="btn btn-link">
+                                                            <core:icon identifier="actions-list" size="small" />
+                                                            <span>Appointments Overview</span>
+                                                        </f:link.action>
+                                                    </f:if>
+                                                    <f:link.action action="registrationsOverview" arguments="{event: event.uid}" class="btn btn-link">
                                                         <core:icon identifier="content-user" size="small" />
                                                         <span>Registrations Overview</span>
                                                     </f:link.action>
@@ -86,40 +133,56 @@
                             </div>
                         </f:for>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="pagination">
+                                <f:for each="{events.pagination.allPageNumbers}" as="page">
+                                    <li class="page-item">
+                                        <f:link.action
+                                                arguments="{currentPageNumber:page}"
+                                                class="page-link {f:if(condition:'{events.currentPageNumber}== {page}',then:'active')}"
+                                        >
+                                            {page}
+                                        </f:link.action>
+                                    </li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="mb-3">Locations ({locations -> f:count()})</h3>
-            </div>
-            <f:for each="{locations}" as="location">
-                <div class="col-md-4">
-                    <div class="card shadow-none p-4 rounded-0">
-                        <div class="row">
-                            <div class="col-12">
-                                <h3>{location.name}</h3>
-                            </div>
-                            <div class="col-12">
-                                <div class="actions d-block w-full">
-                                    <p class="mb-2"><strong>Actions</strong></p>
-                                    <div class="d-flex flex-column align-items-start justify-content-start gap-1">
-                                        <be:link.editRecord class="btn btn-link" uid="{location.uid}" table="{newLocationTable}" returnUrl="{newLocationReturn}">
-                                            <core:icon identifier="actions-document-edit" size="small" />
-                                            <span>Edit Location</span>
-                                        </be:link.editRecord>
+    <f:comment>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-3">Locations ({locations -> f:count()})</h3>
+                </div>
+                <f:for each="{locations}" as="location">
+                    <div class="col-md-4">
+                        <div class="card shadow-none p-4 rounded-0">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3>{location.name}</h3>
+                                </div>
+                                <div class="col-12">
+                                    <div class="actions d-block w-full">
+                                        <p class="mb-2"><strong>Actions</strong></p>
+                                        <div class="d-flex flex-column align-items-start justify-content-start gap-1">
+                                            <be:link.editRecord class="btn btn-link" uid="{location.uid}" table="{newLocationTable}" returnUrl="{newLocationReturn}">
+                                                <core:icon identifier="actions-document-edit" size="small" />
+                                                <span>Edit Location</span>
+                                            </be:link.editRecord>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </f:for>
+                </f:for>
+            </div>
         </div>
-    </div>
-
+    </f:comment>
 </f:section>
 </html>

@@ -22,3 +22,11 @@ ExtensionUtility::registerPlugin(
     'surfcamp-events'
 );
 
+
+ExtensionUtility::registerPlugin(
+    'SurfcampEvents',
+    'EventRegistration',
+    'Registration for Event',
+    'form-fieldset',
+    'surfcamp-events'
+);

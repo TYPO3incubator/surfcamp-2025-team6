@@ -25,7 +25,7 @@ return [
         'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time, timezone, appointment, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, timezone, appointment, location, registration'],
+        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, timezone, appointment, location, registration, is_open_for_registrations, maximum_attendee_capacity'],
     ],
     'columns' => [
         'hidden' => [
@@ -138,5 +138,18 @@ return [
                 'foreign_field' => 'registration',
             ],
         ],
+        'is_open_for_registrations' => [
+            'label' => 'Event accepts registrations',
+            'config' => [
+                'type' => 'check',
+            ]
+        ],
+        'maximum_attendee_capacity' => [
+            'label' => 'Maximum Attendee capacity',
+            'config' => [
+                'type' => 'number',
+                'min' => 0
+            ]
+        ]
     ],
 ];

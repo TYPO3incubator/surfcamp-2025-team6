@@ -47,6 +47,8 @@ class Event extends AbstractDomainObject
      */
     protected mixed $location = null;
 
+    protected int $maximumAttendeeCapacity = 0;
+
     /**
      * @return void
      */
@@ -114,5 +116,35 @@ class Event extends AbstractDomainObject
     public function setLocation(mixed $location): void
     {
         $this->location = $location;
+    }
+
+    public function getAppointment(): ?ObjectStorage
+    {
+        return $this->appointment;
+    }
+
+    public function setAppointment(?ObjectStorage $appointment): void
+    {
+        $this->appointment = $appointment;
+    }
+
+    public function getRegistration(): ?ObjectStorage
+    {
+        return $this->registration;
+    }
+
+    public function setRegistration(?ObjectStorage $registration): void
+    {
+        $this->registration = $registration;
+    }
+
+    public function getMaximumAttendeeCapacity(): int
+    {
+        return $this->maximumAttendeeCapacity;
+    }
+
+    public function setMaximumAttendeeCapacity(int $maximumAttendeeCapacity): void
+    {
+        $this->maximumAttendeeCapacity = $maximumAttendeeCapacity;
     }
 }
