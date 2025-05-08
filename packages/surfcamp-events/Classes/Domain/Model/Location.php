@@ -10,73 +10,49 @@ class Location extends AbstractDomainObject
      * @var string
      */
     protected string $name = '';
+
+    /**
+     * @var string
+     */
+    protected string $timezone = '';
+
+    /**
+     * @var float
+     */
+    protected float $latitude = 28.07084;
+
+    /**
+     * @var float
+     */
+    protected float $longitude = -14.30764;
+
+    /**
+     * @var string
+     */
     protected string $street = '';
-    protected int $streetNr = 0;
-    protected string $zip = '';
+
+    /**
+     * @var string
+     */
+    protected string $streetNr = '';
+
+    /**
+     * @var string
+     */
+    protected string $postalCode;
+
+    /**
+     * @var string
+     */
     protected string $city = '';
-    protected string $country = '';
-    protected float $latitude = 0;
-    protected float $longitude = 0;
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    /**
+     * @var string
+     */
+    protected string $country;
 
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
 
-    public function getStreet(): string
-    {
-        return $this->street;
-    }
-
-    public function setStreet(string $street): void
-    {
-        $this->street = $street;
-    }
-
-    public function getStreetNr(): int
-    {
-        return $this->streetNr;
-    }
-
-    public function setStreetNr(int $streetNr): void
-    {
-        $this->streetNr = $streetNr;
-    }
-
-    public function getZip(): string
-    {
-        return $this->zip;
-    }
-
-    public function setZip(string $zip): void
-    {
-        $this->zip = $zip;
-    }
-
-    public function getCity(): string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): void
-    {
-        $this->city = $city;
-    }
-
-    public function getCountry(): string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(string $country): void
-    {
-        $this->country = $country;
-    }
+    // Getters and Setters
 
     public function getLatitude(): float
     {
@@ -96,5 +72,75 @@ class Location extends AbstractDomainObject
     public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
+    }
+
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    public function setStreet(string $street): void
+    {
+        $this->street = $street;
+    }
+
+    public function getStreetNr(): string
+    {
+        return $this->streetNr;
+    }
+
+    public function setStreetNr(string $streetNr): void
+    {
+        $this->streetNr = $streetNr;
+    }
+
+    public function getPostalCode(): string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(string $postalCode): void
+    {
+        $this->postalCode = $postalCode;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): void
+    {
+        $this->country = $country;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getTimezone(): string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(string $timezone): void
+    {
+        $this->timezone = $timezone;
     }
 }

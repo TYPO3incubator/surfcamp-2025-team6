@@ -1,5 +1,7 @@
 <?php
 
+$timezoneService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3Incubator\SurfcampEvents\Service\TimezoneService::class);
+
 return [
     'ctrl' => [
         'title' => 'Appointment',
@@ -15,10 +17,10 @@ return [
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
     ],
     'interface' => [
-        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, location, registration',
+        'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, location, registration'],
+        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration'],
     ],
     'columns' => [
         'title' => [
@@ -42,17 +44,50 @@ return [
                 'type' => 'datetime',
             ],
         ],
+        'start_date_time_utc' => [
+            'label' => 'Start Date & Time [UTC]',
+            'config' => [
+                'type' => 'datetime',
+            ],
+        ],
         'end_date_time' => [
             'label' => 'End Date & Time',
             'config' => [
                 'type' => 'datetime',
             ],
         ],
-        'location' => [
-            'label' => 'Location',
+        'end_date_time_utc' => [
+            'label' => 'End Date & Time [UTC]',
+            'config' => [
+                'type' => 'datetime',
+            ],
+        ],
+        'timezone' => [
+            'label' => 'Timezone',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
+                'items' => array_map(function($tz) {
+                    return [$tz, $tz];
+                }, \DateTimeZone::listIdentifiers()),
+                'default' => $timezoneService->getUserTimezone(),
+            ],
+        ],
+        'tzdb_version' => [
+            'label' => 'tzdb version',
+            'config' => [
+                'type' => 'input',
+            ],
+        ],
+        'location' => [
+            'label' => 'Location',
+            'onChange' => 'reload',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingleWithTimezoneValidation',
+                'items' => array(
+                    array("-- Please select a location --", 0),
+                ),
                 'foreign_table' => 'tx_surfcamp_events_location',
             ],
         ],

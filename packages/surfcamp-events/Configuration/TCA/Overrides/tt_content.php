@@ -20,3 +20,12 @@ ExtensionUtility::registerPlugin(
     'form-fieldset',
     'surfcamp-events'
 );
+
+ExtensionUtility::registerPlugin(
+    'SurfcampEvents',
+    'EventLocationsMap',
+    'Events by Location on Map',
+    'content-pin',
+    'surfcamp-events'
+);
+
