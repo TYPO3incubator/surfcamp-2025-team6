@@ -28,11 +28,13 @@
 
     <p>{event.description}</p>
 
-    <p>
-        <a href="{googleCalendarUrl}" target="_blank">
-            Add to Google Calendar
-        </a>
-    </p>
+    <f:if condition="{googleCalendarUrl}">
+        <p class="fs-6">
+            <a href="{googleCalendarUrl}" target="_blank"
+                >Add to Google Calendar</a
+            >
+        </p>
+    </f:if>
 
     <f:if condition="{event.appointment}">
         <f:for each="{event.appointment}" as="appointment">

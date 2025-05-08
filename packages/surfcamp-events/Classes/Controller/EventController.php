@@ -34,7 +34,11 @@ final class EventController extends ActionController
 
     public function detailAction(Event $event): ResponseInterface
     {
-        $googleCalendarUrl = $this->googleCalendarService->getGoogleCalendarUrl($event);
+        $googleCalendarUrl = null;
+        
+        if ($event->getStartDateTime() != 0 && $event->getEndDateTime() != 0) {
+            $googleCalendarUrl = $this->googleCalendarService->getGoogleCalendarUrl($event);
+        }
        
         $this->view->assignMultiple([
             'event' => $event,
