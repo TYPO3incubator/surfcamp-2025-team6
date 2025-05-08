@@ -47,12 +47,24 @@
                                     <f:if condition="{event.eventType} !== 'standard'">
                                         <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                             <core:icon identifier="content-clock" size="small"/>
-                                            <span>{event.appointment -> f:count()} {f:if condition:'{event.appointment}', then: 'Appointment', else: 'Appointments'}  }</span>
+                                            <span>
+                                                {event.appointment -> f:count()}
+                                                <f:if condition="{event.appointment -> f:count()} == 1">
+                                                <f:then>Appointment</f:then>
+                                                <f:else>Appointments</f:else>
+                                            </f:if>
+                                            </span>
                                         </span>
                                     </f:if>
                                     <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                         <core:icon identifier="actions-user"/>
-                                        <span>{event.appointment -> f:count()} {f:if(condition: \'{event.appointment -> f:count()} == 1\x', then: 'Registration', else: 'Registrations'}}</span>
+                                        <span>
+                                            {event.registration -> f:count()}
+                                            <f:if condition="{event.registration -> f:count()} == 1">
+                                                <f:then>Registration</f:then>
+                                                <f:else>Registrations</f:else>
+                                            </f:if>
+                                        </span>
                                     </span>
                                     <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                         <core:icon identifier="content-map" size="small"/>
@@ -88,6 +100,9 @@
         div[data-schemaid="root"] .card {
             border-radius: 0 !important;
         box-shadow: none !important;
+        }
+        div[data-schematype] p {
+            margin-top: -10px;
         }
     </f:asset.css>
 </f:section>
