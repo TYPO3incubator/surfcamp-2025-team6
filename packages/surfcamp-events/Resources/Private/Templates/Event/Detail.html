@@ -1,23 +1,18 @@
+<f:render partial="AdditionalCSS"></f:render>
+
 <f:flashMessages as="flashMessages">
-    <dl class="messages">
-        <f:for each="{flashMessages}" as="flashMessage">
-            <div class="alert alert-primary" role="alert">
-                <h3 class="alert-heading">{flashMessage.message}</h3>
-            </div>
-        </f:for>
-    </dl>
+    <f:for each="{flashMessages}" as="flashMessage">
+        <div class="alert alert-primary" role="alert">
+            <h5 class="alert-heading">{flashMessage.title}</h5>
+            <p>{flashMessage.message}</p>
+        </div>
+    </f:for>
 </f:flashMessages>
 
 <h3>{event.title}</h3>
-<small>📍{event.location.name}</small> <br/>
-<small>
-    <f:if condition="{event.startDateTime}">
-        🕓 {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}
-    </f:if>
-    <f:if condition="{event.endDateTime}">
-        - {event.endDateTime -> f:format.date(format: 'd.m.Y g:i a')}
-    </f:if>
-</small>
+<f:render partial="Location" arguments="{location: event.location}"></f:render><br/>
+<f:render partial="Date" arguments="{startDateTime: event.startDateTime, endDateTime: event.endDateTime}"></f:render>
+
 <p>{event.description}</p>
 
 <f:if condition="{event.appointment}">
@@ -25,6 +20,8 @@
         <div class="card">
             <h5 class="card-title">{appointment.title}</h5>
             <div class="card-body">
+                <f:render partial="Location" arguments="{location: appointment.location}"></f:render><br />
+                <f:render partial="Date" arguments="{startDateTime: appointment.startDateTime, endDateTime: appointment.endDateTime}"></f:render>
                 <f:if condition="{appointment.isOpenForRegistrations}">
                     <f:form
                             action="processAppointmentRegistration"
