@@ -3,6 +3,7 @@
 namespace TYPO3Incubator\SurfcampEvents\Controller\Backend;
 
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Attribute\AsController;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -14,6 +15,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\LocationRepository;
+use TYPO3Incubator\SurfcampEvents\Service\AppointmentGeneratorService;
 
 #[AsController]
 final class EventGeneratorBackendModuleController extends ActionController
@@ -26,6 +28,7 @@ final class EventGeneratorBackendModuleController extends ActionController
         private readonly UriBuilder $backendUriBuilder,
         private readonly EventRepository $eventRepository,
         private readonly LocationRepository $locationRepository,
+        private readonly AppointmentGeneratorService $appointmentGeneratorService,
     ) {
     }
 
@@ -48,7 +51,7 @@ final class EventGeneratorBackendModuleController extends ActionController
      */
     public function indexAction(): ResponseInterface
     {
-        // $this->commonViewPreperation();
+        $this->commonViewPreperation();
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
 
         $currentPage = $this->request->hasArgument('currentPageNumber')
@@ -83,11 +86,26 @@ final class EventGeneratorBackendModuleController extends ActionController
         return $moduleTemplate->renderResponse('Backend/EventGenerator/Index');
     }
 
+    /**
+     * @return ResponseInterface
+     * @throws RouteNotFoundException
+     */
     public function generateAppointmentsAction(): ResponseInterface
     {
         $this->commonViewPreperation();
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->assign('someVar', 'someContent');
+        if ($this->request->hasArgument('event')) {
+            $moduleTemplate->assignMultiple([
+                'event' => $this->eventRepository->findByUid((int) $this->request->getArguments()['event']),
+                'events' => [
+                    'newPid' => 1,
+                    'newTable'=> 'tx_surfcamp_events_event',
+                    'newReturn' => $this->backendUriBuilder->buildUriFromRoute('events_eventsgenerator'),
+                ],
+            ]);
+        } else {
+            return $this->redirectToUri($this->backendUriBuilder->buildUriFromRoute('events_eventsgenerator'));
+        }
         return  $moduleTemplate->renderResponse('Backend/EventGenerator/GenerateAppointments');
     }
 
@@ -135,4 +153,17 @@ final class EventGeneratorBackendModuleController extends ActionController
         }
         return  $moduleTemplate->renderResponse('Backend/EventGenerator/RegistrationsOverview');
     }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function generateByBackendGenerator(ServerRequestInterface $request): ResponseInterface
+    {
+        /** @TODO: Check for valid JSON data */
+        $generatorResponse = $this->appointmentGeneratorService->generateAppointments(json_decode($request->getBody()->getContents()));
+        return $this->jsonResponse(json_encode($generatorResponse, JSON_PRETTY_PRINT));
+
+    }
+
 }
