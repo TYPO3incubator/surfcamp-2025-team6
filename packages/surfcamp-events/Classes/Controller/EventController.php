@@ -55,23 +55,4 @@ class EventController extends ActionController
 
         return $this->htmlResponse();
     }
-
-    // /**
-    //  * The List Action
-    //  * @return ResponseInterface
-    //  */
-    // public function listByLocationAction(float $latitude = null, float $longitude = null, float $radiusKm = 10.0): ResponseInterface
-    // {
-
-    //     if ($lat === null || $lng === null) {
-    //         $events = $this->eventRepository->findAll();
-    //     } else {
-    //         $events = $this->eventRepository->findByLocation($lat, $lng, $radiusKm);
-    //     }
-
-    //     // $events = $this->eventRepository->findByLocation($latitude, $longitude, $radiusKm);
-    //     $this->view->assign('events', $events);
-
-    //     return $this->htmlResponse();
-    // }
 }
