@@ -44,12 +44,4 @@ class TimezoneService
 
         return $dt->format('Y-m-d\TH:i:s\Z');
     }
-
-    public function convertToLocaleTime(string $dateTime, string $timezone): string
-    {
-        $dt = new \DateTime($dateTime, new \DateTimeZone('UTC'));
-        $dt->setTimezone(new \DateTimeZone($timezone));
-
-        return $dt->format('Y-m-d\TH:i:s');
-    }
 }
