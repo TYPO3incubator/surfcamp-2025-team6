@@ -52,7 +52,7 @@ class TimezoneApiMiddleware implements MiddlewareInterface
         $data = [];
         /** @var Event $event */
         foreach ($events as $event) {
-            $data[] = [
+            $data[$event->getUid()] = [
                 'eventId' => $event->getUid(),
                 'startDate' => $this->eventDatetimeService->getEventStartDateInTimezone($event, $timezone),
                 'endDate' => $this->eventDatetimeService->getEventEndDateInTimezone($event, $timezone),

@@ -1,9 +1,14 @@
 <f:layout name="Default" />
 
 <f:section name="main">
+    <f:asset.script
+        identifier="get-event-datetime"
+        src="EXT:surfcamp_events/Resources/Public/JavaScript/get_event_datetimes.js"
+    />
+
     <h2>Events</h2>
     <f:for each="{events}" as="event">
-        <div class="event">
+        <div class="event" data-id="{event.uid}">
             <f:link.action
                 action="detail"
                 controller="Event"
@@ -23,9 +28,9 @@
             </f:if>
             <f:if condition="{event.startDateTime} || {event.endDateTime}">
                 <small>
-                    🕓 Date: {event.startDateTime -> f:format.date(format:
-                    'd.m.Y g:i a')} - {event.endDateTime ->
-                    f:format.date(format: 'd.m.Y g:i a')}
+                    🕓 Date: <span class="event-start-date">{event.startDateTime -> f:format.date(format:
+                    'd.m.Y g:i a')}</span> - <span class="event-end-date">{event.endDateTime ->
+                    f:format.date(format: 'd.m.Y g:i a')}</span>
                 </small>
             </f:if>
             <p>{event.description -> f:format.crop(maxCharacters: 50)}</p>
