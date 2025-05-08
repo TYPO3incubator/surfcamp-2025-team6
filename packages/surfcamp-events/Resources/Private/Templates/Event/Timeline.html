@@ -14,17 +14,17 @@
                         <li class="timeline-item <f:if condition="{i.cycle} % 2 == 1">left<f:else>right</f:else></f:if>"">
                             <div class="timeline-point <f:if condition='{i.cycle} % 2 == 1'>point-left<f:else>point-right</f:else></f:if>"></div>
                             <div class="timeline-content <f:if condition='{event.endDateTime} < {f:format.date(date: \'now\', format: \'U\')}'>item-past</f:if>">
-                                
-                                <div class="d-flex justify-between">
-                                    <h5>
-                                    <f:link.action
-                                        action="detail"
-                                        controller="Event"
-                                        arguments="{event: event}"
-                                        pageUid="{detailPageUid}"
-                                    >
-                                        {event.title}
-                                    </f:link.action>
+    
+                                <div class="d-flex justify-content-between mb-2">
+                                    <h5 class="m-0">
+                                        <f:link.action
+                                            action="detail"
+                                            controller="Event"
+                                            arguments="{event: event}"
+                                            pageUid="{detailPageUid}"
+                                        >
+                                            {event.title}
+                                        </f:link.action>
                                     </h5>
 
                                     <div class="d-flex gap-2">
