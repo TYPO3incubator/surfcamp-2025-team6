@@ -11,7 +11,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'name,address',
+        'searchFields' => '',
 //        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Event.svg',
         'security' => [
             'ignoreWebMountRestriction' => true,
@@ -80,6 +80,13 @@ return [
             'config' => [
                 'type' => 'number',
                 'format' => 'decimal',
+            ],
+        ],
+        'timezone' => [
+            'label' => 'Timezone',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
             ],
         ],
     ],

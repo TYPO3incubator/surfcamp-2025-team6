@@ -9,15 +9,30 @@ class Location extends AbstractDomainObject
     /**
      * @var string
      */
-    protected string $title = '';
+    protected string $name = '';
 
-    public function getTitle(): string
+    /**
+     * @var string
+     */
+    protected string $timezone = '';
+
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): void
+    public function setName(string $name): void
     {
-        $this->title = $title;
+        $this->name = $name;
+    }
+
+    public function getTimezone(): string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(string $timezone): void
+    {
+        $this->timezone = $timezone;
     }
 }
