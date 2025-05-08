@@ -58,13 +58,12 @@
                 <div class="col-12 col-sm-6 col-md-4 col-xl-12 mb-3">
                     <div class="card shadow-none rounded-0 h-100">
                         <div class="card-body">
-                            <f:if condition="{event.registration}">
+                            <f:if condition="{event.appointment}">
                                 <f:then>
                                     <f:for each="{event.appointment}" as="appointment">
                                         <div class="appointment d-flex flex-row align-items-center gap-2">
                                             <div class="d-flex flex-column flex-grow-1">
                                                 <h4 class="mb-0">{appointment.title}</h4>
-                                                <p class="mb-0">{appointment.description}</p>
                                             </div>
                                         </div>
                                     </f:for>

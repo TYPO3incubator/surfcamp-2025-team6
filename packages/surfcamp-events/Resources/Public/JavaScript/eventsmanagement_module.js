@@ -1,4 +1,6 @@
 import '@typo3-incubator/surfcamp-events/Libs/json-editor.js'
+import AjaxRequest from "@typo3/core/ajax/ajax-request.js";
+import Notification from "@typo3/backend/notification.js";
 
 class EventsManagementModule {
     init() {
@@ -123,8 +125,22 @@ class EventsManagementModule {
                 }
             });
             jseditor.on('ready',() => {
-                // Now the api methods will be available
-                console.log(jseditor.getValue())
+                const eventUid = element.dataset.eventUid ?? null
+                const submitButton = document.getElementById('submit-button');
+                submitButton?.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (jseditor.validate().length > 0) {
+                        Notification.warning('Warning', 'Please fix the validation errors before submitting the Appointment Generation form.');
+                    } else {
+                        new AjaxRequest(TYPO3.settings.ajaxUrls.surfcamp_events_appointments_generate).post({event: eventUid, data: jseditor.getValue()}, {
+                            headers: {
+                                'Content-Type': 'application/json; charset=utf-8'
+                            }
+                        }).then(async function (response) {
+                            const responseText = await response.resolve();
+                        });
+                    }
+                });
             });
 
         }
