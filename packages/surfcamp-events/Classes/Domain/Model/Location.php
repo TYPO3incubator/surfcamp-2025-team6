@@ -39,7 +39,7 @@ class Location extends AbstractDomainObject
     /**
      * @var string
      */
-    protected string $postalCode;
+    protected string $postalCode = '';
 
     /**
      * @var string
