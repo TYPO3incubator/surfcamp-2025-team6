@@ -7,3 +7,10 @@ services:
   TYPO3Incubator\SurfcampEvents\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
+
+  TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter:
+    tags:
+      - name: extbase.type_converter
+        priority: 10
+        target: \DateTime
+        sources: int,string
