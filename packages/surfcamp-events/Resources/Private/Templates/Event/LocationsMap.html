@@ -1,5 +1,7 @@
 <f:layout name="Default" />
 
+<!-- <f:debug>{locations}</f:debug> -->
+
 <f:section name="main">
     <h2>Events</h2>
 
@@ -66,11 +68,23 @@
                 attribution: "&copy; OpenStreetMap contributors",
             }).addTo(map);
 
+            const markers = [];
+
             eventLocations.forEach(function (event) {
-                L.marker([event.lat, event.lng], { icon: customIcon })
-                    .addTo(map)
-                    .bindPopup(event.title);
+                const marker = L.marker([event.lat, event.lng], {
+                    icon: customIcon,
+                }).addTo(map);
+                marker.bindPopup(event.title);
+                markers.push(marker.getLatLng());
             });
+
+            if (markers.length > 0) {
+                const bounds = L.latLngBounds(markers);
+                map.fitBounds(bounds, { padding: [150, 150] });
+            } else {
+                // Fallback view
+                map.setView([defaultLat, defaultLng], zoomLevel);
+            }
         });
     </script>
 </f:section>
