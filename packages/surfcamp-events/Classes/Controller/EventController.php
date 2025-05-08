@@ -8,14 +8,18 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
+use TYPO3Incubator\SurfcampEvents\Service\GoogleCalendarService;
+
 
 final class EventController extends ActionController
 {
 
     public function __construct(
         private readonly EventRepository $eventRepository,
+        protected GoogleCalendarService $googleCalendarService,
     )
     {}
+
     /**
      * The List Action
      * @return ResponseInterface
@@ -30,10 +34,18 @@ final class EventController extends ActionController
 
     public function detailAction(Event $event): ResponseInterface
     {
+        $googleCalendarUrl = null;
+        
+        if ($event->getStartDateTime() != 0 && $event->getEndDateTime() != 0) {
+            $googleCalendarUrl = $this->googleCalendarService->getGoogleCalendarUrl($event);
+        }
+       
         $this->view->assignMultiple([
             'event' => $event,
-            'isInPast' => $event->getEndDateTime() != 0 && $event->getEndDateTime() < (new \DateTime())->getTimestamp()
+            'isInPast' => $event->getEndDateTime() != 0 && $event->getEndDateTime() < (new \DateTime())->getTimestamp(),
+            'googleCalendarUrl' => $googleCalendarUrl,
         ]);
+
         return $this->htmlResponse();
     }
 
