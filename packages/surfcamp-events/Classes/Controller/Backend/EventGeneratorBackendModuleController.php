@@ -3,6 +3,7 @@
 namespace TYPO3Incubator\SurfcampEvents\Controller\Backend;
 
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Attribute\AsController;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -14,6 +15,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\LocationRepository;
+use TYPO3Incubator\SurfcampEvents\Service\AppointmentGeneratorService;
 
 #[AsController]
 final class EventGeneratorBackendModuleController extends ActionController
@@ -26,6 +28,7 @@ final class EventGeneratorBackendModuleController extends ActionController
         private readonly UriBuilder $backendUriBuilder,
         private readonly EventRepository $eventRepository,
         private readonly LocationRepository $locationRepository,
+        private readonly AppointmentGeneratorService $appointmentGeneratorService,
     ) {
     }
 
@@ -151,9 +154,15 @@ final class EventGeneratorBackendModuleController extends ActionController
         return  $moduleTemplate->renderResponse('Backend/EventGenerator/RegistrationsOverview');
     }
 
-    public function generateRegistrationsAction(): ResponseInterface
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function generateByBackendGenerator(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->htmlResponse('There are ');
+        /** @TODO: Check for valid JSON data */
+        $generatorResponse = $this->appointmentGeneratorService->generateAppointments(json_decode($request->getBody()->getContents()));
+        return $this->jsonResponse(json_encode($generatorResponse, JSON_PRETTY_PRINT));
 
     }
 
