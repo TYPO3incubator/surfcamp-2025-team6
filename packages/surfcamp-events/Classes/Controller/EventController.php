@@ -6,6 +6,7 @@ use AllowDynamicProperties;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
 
 final class EventController extends ActionController
