@@ -6,6 +6,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3Incubator\SurfcampEvents\Domain\Model\Appointment;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
 
 class RegistrationRepository extends Repository
@@ -33,7 +34,19 @@ class RegistrationRepository extends Repository
             $result = $query->execute();
             return count($result);
         } catch (\Exception $e) {
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($e->getMessage());
+            return -1;
+        }
+    }
+
+    public function findAttendeeCountByAppointment(Appointment $appointment): int
+    {
+        try {
+            $query = $this->createQuery();
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $query->matching($query->equals('appointment', $appointment->getUid()));
+            $result = $query->execute();
+            return count($result);
+        } catch (\Exception) {
             return -1;
         }
     }
@@ -50,6 +63,24 @@ class RegistrationRepository extends Repository
             $result = $query->execute();
             return count($result) > 0;
         } catch (\Exception $e) {
+            return true;
+        }
+    }
+
+    public function findEmailAlreadyRegisteredByAppointment(Appointment $appointment, string $email): bool
+    {
+        try {
+            $query = $this->createQuery();
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $query->matching($query->logicalAnd(
+                $query->equals('appointment', $appointment->getUid()),
+                $query->equals('email', $email)
+            ));
+            $result = $query->execute();
+            return count($result) > 0;
+        } catch (\Exception $e) {
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($e->getMessage());
+            die();
             return true;
         }
     }

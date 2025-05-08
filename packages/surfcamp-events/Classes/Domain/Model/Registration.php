@@ -3,28 +3,14 @@
 namespace TYPO3Incubator\SurfcampEvents\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Registration extends AbstractDomainObject
 {
-    /** @var null | ObjectStorage<Event> */
-    protected mixed $event;
-    /** @var null | ObjectStorage<Appointment> */
-    protected mixed $appointment;
-    protected string $email;
+    protected ?Event $event = null;
+    protected ?Appointment $appointment = null;
+    protected string $email = '';
 
-    protected function initStorageObjects(): void
-    {
-        $this->appointment = new ObjectStorage();
-        $this->registration = new ObjectStorage();
-    }
-
-    public function __construct()
-    {
-        $this->initStorageObjects();
-    }
-
-    public function getEvent(): Event
+    public function getEvent(): Event | null
     {
         return $this->event;
     }
@@ -34,12 +20,12 @@ class Registration extends AbstractDomainObject
         $this->event = $event;
     }
 
-    public function getAppointment(): Appointment
+    public function getAppointment(): Appointment | null
     {
         return $this->appointment;
     }
 
-    public function setAppointment(ObjectStorage $appointment): void
+    public function setAppointment(Appointment $appointment): void
     {
         $this->appointment = $appointment;
     }
