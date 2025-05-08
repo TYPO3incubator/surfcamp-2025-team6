@@ -1,5 +1,7 @@
 <?php
 
+$timezoneService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3Incubator\SurfcampEvents\Service\TimezoneService::class);
+
 return [
     'ctrl' => [
         'title' => 'Event',
@@ -20,10 +22,10 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time, appointment, location, registration',
+        'showRecordFieldList' => 'title, description, event_type, start_date_time, end_date_time, timezone, appointment, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, appointment, location, registration, is_open_for_registrations, maximum_attendee_capacity'],
+        '1' => ['showitem' => 'title, description, event_type, start_date_time, end_date_time, timezone, appointment, location, registration, is_open_for_registrations, maximum_attendee_capacity'],
     ],
     'columns' => [
         'hidden' => [
@@ -73,10 +75,39 @@ return [
                 'type' => 'datetime',
             ],
         ],
+        'start_date_time_utc' => [
+            'label' => 'Start Date & Time [UTC]',
+            'config' => [
+                'type' => 'datetime',
+            ],
+        ],
         'end_date_time' => [
             'label' => 'End Date & Time',
             'config' => [
                 'type' => 'datetime',
+            ],
+        ],
+        'end_date_time_utc' => [
+            'label' => 'End Date & Time [UTC]',
+            'config' => [
+                'type' => 'datetime',
+            ],
+        ],
+        'timezone' => [
+            'label' => 'Timezone',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => array_map(function($tz) {
+                    return [$tz, $tz];
+                }, \DateTimeZone::listIdentifiers()),
+                'default' => $timezoneService->getUserTimezone(),
+            ],
+        ],
+        'tzdb_version' => [
+            'label' => 'tzdb version',
+            'config' => [
+                'type' => 'input',
             ],
         ],
         'appointment' => [
@@ -89,6 +120,7 @@ return [
         ],
         'location' => [
             'label' => 'Location',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingleWithTimezoneValidation',

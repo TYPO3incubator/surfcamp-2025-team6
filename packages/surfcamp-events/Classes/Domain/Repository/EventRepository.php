@@ -25,6 +25,17 @@ class EventRepository extends Repository
         $this->setDefaultQuerySettings($querySettings);
     }
 
+    public function findUpcomingEvents(): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $now = new \DateTimeImmutable('today');
+
+        $query->matching(
+            $query->greaterThanOrEqual('end_date_time', $now)
+        );
+
+        return $query->execute();
+    }
     /**
      * @param string $searchTerm
      * @return QueryResultInterface

@@ -1,6 +1,23 @@
-<f:for each="{events}" as="event">
-    <f:link.action action="detail" controller="Event" arguments="{event: event}">
-        <h4>{event.title}</h4>
-    </f:link.action>
-    <small>{event.description -> f:format.crop(maxCharacters: 50)}</small>
-</f:for>
+<f:layout name="Default" />
+
+<f:section name="main">
+    <h2>Events</h2>
+    <f:for each="{events}" as="event">
+        <div class="event">
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
+            <p>
+                {event.startDateTime -> f:format.date(format: 'Y-m-d H:i')} -
+                {event.endDateTime -> f:format.date(format: 'Y-m-d H:i')}
+            </p>
+            <f:if condition="{event.location}">
+                <p>
+                    Location: {event.location.name} - {event.location.street}
+                    {event.location.streetNr}, {event.location.city}
+                    {event.location.postalCode}, {event.location.country}
+                    {event.location.postalCode}
+                </p>
+            </f:if>
+        </div>
+    </f:for>
+</f:section>
