@@ -12,7 +12,9 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => '',
-//        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Event.svg',
+        'typeicon_classes' => [
+            'default' => 'actions-house'
+        ],
         'security' => [
             'ignoreWebMountRestriction' => true,
             'ignoreRootLevelRestriction' => true,

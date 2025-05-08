@@ -16,7 +16,9 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'title,description',
-//        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Event.svg',
+        'typeicon_classes' => [
+            'default' => 'actions-calendar'
+        ],
         'security' => [
             'ignoreWebMountRestriction' => true,
             'ignoreRootLevelRestriction' => true,

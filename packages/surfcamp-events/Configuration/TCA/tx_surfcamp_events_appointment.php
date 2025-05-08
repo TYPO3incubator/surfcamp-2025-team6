@@ -17,7 +17,9 @@ return [
         'security' => [
             'ignorePageTypeRestriction' => true,
         ],
-//        'iconfile' => 'EXT:myeventextension/Resources/Public/Icons/Appointment.svg',
+        'typeicon_classes' => [
+            'default' => 'actions-clock'
+        ]
     ],
     'interface' => [
         'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration',
