@@ -1,7 +1,6 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-
     <!-- <f:asset.css identifier="timeline-css" href="EXT:surfcamp_events/Resources/Public/Css/timeline.css"/> -->
 
     <div class="container py-5">
@@ -14,28 +13,54 @@
                         
                         <li class="timeline-item <f:if condition="{i.cycle} % 2 == 1">left<f:else>right</f:else></f:if>"">
                             <div class="timeline-point <f:if condition='{i.cycle} % 2 == 1'>point-left<f:else>point-right</f:else></f:if>"></div>
-                            <div class="timeline-content">
+                            <div class="timeline-content <f:if condition='{event.endDateTime} < {f:format.date(date: \'now\', format: \'U\')}'>item-past</f:if>">
                                 
-                                <h5 class="d-flex gap-3">
-                                <f:link.action
-                                    action="detail"
-                                    controller="Event"
-                                    arguments="{event: event}"
-                                    pageUid="{detailPageUid}"
-                                >
-                                    {event.title}
-                                </f:link.action>
+                                <div class="d-flex justify-between">
+                                    <h5>
+                                    <f:link.action
+                                        action="detail"
+                                        controller="Event"
+                                        arguments="{event: event}"
+                                        pageUid="{detailPageUid}"
+                                    >
+                                        {event.title}
+                                    </f:link.action>
+                                    </h5>
 
-                                <span class="rounded badge text-bg-secondary w-inherit h-inherit py-1 px-2 fs-6">
-                                    <f:format.case mode="upper">{event.eventType}</f:format.case>
-                                </span>
+                                    <div class="d-flex gap-2">
+                                    <span class="badge text-bg-secondary w-inherit h-inherit">
+                                        <f:format.case mode="upper">{event.eventType}</f:format.case>
+                                    </span>
+                                    <f:if condition="{event.endDateTime} < {f:format.date(date: 'now', format: 'U')}">
+                                        <span class="badge bg-secondary">PAST</span>
+                                    </f:if>
+                                    </div>
+                                </div>
 
-                            </h5>
+                                <f:if condition="{event.location}">
+                                    <small>
+                                        📍{event.location.name} - {event.location.street}
+                                        {event.location.streetNr}, {event.location.city}
+                                        {event.location.postalCode}, {event.location.country}
+                                        {event.location.postalCode}
+                                    </small>
+                                    <br />
+                                </f:if>
+                            
                                 <small>
-                                    🕓 Start: {event.startDateTime -> f:format.date(format:
-                                    'd.m.Y g:i a')} </br>
-                                    🕡 End: {event.endDateTime ->
-                                    f:format.date(format: 'd.m.Y g:i a')}
+                                    🕓 Start: 
+                                    <f:if condition="{event.startDateTime}">
+                                        <f:then>
+                                            {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}<br>
+                                        </f:then>
+                                        <f:else>
+                                            TBA<br>
+                                        </f:else>
+                                    </f:if>
+                                    🕡 End: <f:if condition="{event.endDateTime}">
+                                        {event.endDateTime ->
+                                        f:format.date(format: 'd.m.Y g:i a')}
+                                    </f:if>
                                 </small>
                             </div>
                         </li>

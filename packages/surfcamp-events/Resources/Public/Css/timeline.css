@@ -39,6 +39,10 @@
     position: relative;
 }
 
+.item-past.timeline-content {
+    background: #dbdada;
+}
+
 .timeline-item.right .timeline-content {
     justify-self: end;
 }
