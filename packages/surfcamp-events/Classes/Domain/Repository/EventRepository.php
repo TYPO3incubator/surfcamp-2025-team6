@@ -3,6 +3,7 @@
 namespace TYPO3Incubator\SurfcampEvents\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -14,7 +15,7 @@ class EventRepository extends Repository
      * Default Ordering by UID
      * @var array
      */
-    protected $defaultOrderings = ['uid' => QueryInterface::ORDER_ASCENDING];
+    protected $defaultOrderings = ['start_date_time' => QueryInterface::ORDER_DESCENDING];
 
     public function initializeObject(): void
     {
@@ -22,6 +23,26 @@ class EventRepository extends Repository
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
+    }
+
+    /**
+     * @param string $searchTerm
+     * @return QueryResultInterface
+     * @throws InvalidQueryException
+     */
+    public function findAllWithSearchTerm(string $searchTerm): QueryResultInterface
+    {
+        if ($searchTerm !== '') {
+            $query = $this->createQuery();
+            $query->matching(
+                $query->logicalOr(
+                    $query->like('title', '%' . $searchTerm . '%'),
+                )
+            );
+            return $query->execute();
+        } else {
+            return $this->findAll();
+        }
     }
 
     public function findByIsOpenForRegistrations(): QueryResultInterface

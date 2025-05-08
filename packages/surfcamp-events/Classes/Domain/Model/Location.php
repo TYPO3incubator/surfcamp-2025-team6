@@ -9,15 +9,15 @@ class Location extends AbstractDomainObject
     /**
      * @var string
      */
-    protected string $title = '';
+    protected string $name = '';
 
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): void
+    public function setName(string $name): void
     {
-        $this->title = $title;
+        $this->name = $name;
     }
 }

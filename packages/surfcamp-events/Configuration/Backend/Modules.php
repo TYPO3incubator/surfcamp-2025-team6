@@ -12,7 +12,7 @@ return [
         'labels' => 'LLL:EXT:surfcamp_events/Resources/Private/Language/locallang_mod_web_eventsgenerator.xlf',
         'extensionName' => 'SurfcampEvents',
         'iconIdentifier' => 'mod-events-management',
-        'inheritNavigationComponentFromMainModule' => false,
+        // 'inheritNavigationComponentFromMainModule' => false,
         'controllerActions' => [
             EventGeneratorBackendModuleController::class => [
                 'index', 'generateAppointments', 'registrationsOverview', 'appointmentsOverview',
