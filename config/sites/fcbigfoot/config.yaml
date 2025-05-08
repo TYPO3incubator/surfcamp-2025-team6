@@ -1,10 +1,9 @@
-base: '%env(SITE_FCBIGFOOT_BASE)%'
+base: "%env(SITE_FCBIGFOOT_BASE)%"
 dependencies:
   - typo3-incubator/theme-fcbigfoot
   - typo3-incubator/surfcamp-events
 languages:
-  -
-    title: English
+  - title: English
     enabled: true
     languageId: 0
     base: /
@@ -12,4 +11,25 @@ languages:
     navigationTitle: English
     flag: us
 rootPageId: 1
-websiteTitle: 'FC Bigfoot'
+websiteTitle: "FC Bigfoot"
+routeEnhancers:
+  EventPlugin:
+    type: Extbase
+    extension: SurfcampEvents
+    plugin: EventList
+    routes:
+      - routePath: "/event/{event}"
+        _controller: "Event::detail"
+        _arguments:
+          event: event
+    defaultController: "Event::list"
+  EventMapPlugin:
+    type: Extbase
+    extension: SurfcampEvents
+    plugin: EventLocationsMap
+    routes:
+      - routePath: "/event/{event}"
+        _controller: "Event::detail"
+        _arguments:
+          event: event
+    defaultController: "Event::locationsMap"

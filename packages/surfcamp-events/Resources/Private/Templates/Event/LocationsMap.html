@@ -1,10 +1,6 @@
 <f:layout name="Default" />
 
-<!-- <f:debug>{locations}</f:debug> -->
-
 <f:section name="main">
-    <h2>Events</h2>
-
     <!-- Include Leaflet CSS -->
     <link
         rel="stylesheet"
@@ -23,13 +19,9 @@
     <!-- Map container -->
     <div
         id="map"
-        style="height: 400px"
+        style="height: 500px"
         data-locations="{locations -> f:format.json()}"
     ></div>
-
-    <!-- <script>
-        var eventLocations = <f:format.raw>{locations -> f:format.json()}</f:format.raw>;
-    </script> -->
 
     <script>
         const element = document.getElementById("map");
@@ -50,7 +42,7 @@
             iconUrl: '<f:uri.resource path="Icons/marker-red-football.png" />',
             iconSize: [56, 56], // adjust as needed
             iconAnchor: [28, 51],
-            popupAnchor: [1, -34],
+            popupAnchor: [1, -44],
             shadowUrl:
                 "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
             shadowSize: [51, 51],
@@ -70,11 +62,18 @@
 
             const markers = [];
 
-            eventLocations.forEach(function (event) {
+            eventLocations.forEach(function (event, index) {
+                const popupContent = `
+                    <a href="${event.eventDetailUrl}">
+                        <strong>${event.title}</strong>
+                    </a>`;
+
                 const marker = L.marker([event.lat, event.lng], {
                     icon: customIcon,
                 }).addTo(map);
-                marker.bindPopup(event.title);
+
+                marker.bindPopup(popupContent);
+
                 markers.push(marker.getLatLng());
             });
 

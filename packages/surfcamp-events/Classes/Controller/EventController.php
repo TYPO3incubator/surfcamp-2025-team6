@@ -44,22 +44,29 @@ final class EventController extends ActionController
     public function locationsMapAction(): ResponseInterface
     {
         $events = $this->eventRepository->findUpcomingEvents();
-
+        
         $locations = [];
         foreach ($events as $event) {
+            
+            $uri = $this->uriBuilder
+            ->reset()
+            ->setTargetPageUid($GLOBALS['TSFE']->id)
+            ->uriFor('detail', ['event' => $event->getUid()], 'Event');
+
             $location = $event->getLocation();
             if ($location !== null && $location->getLatitude() !== null && $location->getLongitude() !== null) {
                 $locations[] = [
                     'lat' => $location->getLatitude(),
                     'lng' => $location->getLongitude(),
-                    'title' => $event->getTitle()
+                    'title' => $event->getTitle(),
+                    'eventId' => $event->getUid(),
+                    'eventDetailUrl' => $uri,
                 ];
             }
         }
 
         $this->view->assignMultiple([
             'locations' => $locations,
-            'events' => $events,
         ]);
 
         return $this->htmlResponse();
