@@ -35,7 +35,7 @@ final class RegistrationService
         }
 
         // Check if Event is in the past
-        if ($event->getEndDateTime() < (new DateTime())->getTimestamp()) {
+        if ($event->getEndDateTime() < new DateTime()) {
             return RegistrationStatus::STATUS_EVENT_IN_PAST;
         }
 
@@ -62,7 +62,7 @@ final class RegistrationService
         }
 
         // Check if Event is in the past
-        if ($appointment->getEndDateTime() < (new DateTime())->getTimestamp()) {
+        if ($appointment->getEndDateTime() < new DateTime()) {
             return RegistrationStatus::STATUS_EVENT_IN_PAST;
         }
 
