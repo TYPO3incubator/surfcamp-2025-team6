@@ -31,7 +31,7 @@
                                     <span class="badge text-bg-secondary w-inherit h-inherit">
                                         <f:format.case mode="upper">{event.eventType}</f:format.case>
                                     </span>
-                                    <f:if condition="{event.endDateTime} < {f:format.date(date: 'now', format: 'U')}">
+                                    <f:if condition="{event.endDateTime} && {event.endDateTime} < {f:format.date(date: 'now', format: 'U')}">
                                         <span class="badge bg-secondary">PAST</span>
                                     </f:if>
                                     </div>
@@ -48,17 +48,17 @@
                                 </f:if>
                             
                                 <small>
-                                    🕓 Start: 
+                                   
                                     <f:if condition="{event.startDateTime}">
                                         <f:then>
-                                            {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}<br>
+                                            🕓 Start: {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}<br>
                                         </f:then>
                                         <f:else>
-                                            TBA<br>
+                                            🕓 Date: TBA<br>
                                         </f:else>
                                     </f:if>
-                                    🕡 End: <f:if condition="{event.endDateTime}">
-                                        {event.endDateTime ->
+                                    <f:if condition="{event.endDateTime}">
+                                        🕡 End: {event.endDateTime ->
                                         f:format.date(format: 'd.m.Y g:i a')}
                                     </f:if>
                                 </small>
