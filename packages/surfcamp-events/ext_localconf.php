@@ -27,12 +27,16 @@ ExtensionUtility::configurePlugin(
 ExtensionUtility::configurePlugin(
     'SurfcampEvents',
     'EventLocationsMap',
-    [
-        EventController::class => 'locationsMap',
-    ],
-    [
-        EventController::class => '',
-    ],
+    [EventController::class => 'locationsMap'],
+    [EventController::class => 'locationsMap',],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+);
+
+ExtensionUtility::configurePlugin(
+    'SurfcampEvents',
+    'EventTimeline',
+    [EventController::class => 'timeline'],
+    [EventController::class => 'timeline',],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 

@@ -71,4 +71,25 @@ final class EventController extends ActionController
 
         return $this->htmlResponse();
     }
+
+     /**
+     * The List Action
+     * @return ResponseInterface
+     */
+    public function timelineAction(): ResponseInterface
+    {
+
+        $query = $this->eventRepository->createQuery();
+        $query->setOrderings([
+            'start_date_time' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        ]);
+
+        $events = $query->execute();
+
+        $this->view->assignMultiple([
+            'events' => $events
+        ]);
+    
+        return $this->htmlResponse();
+    }
 }
