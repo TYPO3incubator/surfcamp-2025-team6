@@ -15,6 +15,9 @@ return [
             'end_date_time' => [
                 'fieldName' => 'end_date_time',
             ],
+            'is_open_for_registrations' => [
+                'fieldName' => 'is_open_for_registrations',
+            ]
         ],
     ],
     \TYPO3Incubator\SurfcampEvents\Domain\Model\Appointment::class => [

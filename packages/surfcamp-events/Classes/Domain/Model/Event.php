@@ -48,6 +48,7 @@ class Event extends AbstractDomainObject
     protected mixed $location = null;
 
     protected int $maximumAttendeeCapacity = 0;
+    protected bool $is_open_for_registrations = false;
 
     /**
      * @return void
@@ -146,5 +147,15 @@ class Event extends AbstractDomainObject
     public function setMaximumAttendeeCapacity(int $maximumAttendeeCapacity): void
     {
         $this->maximumAttendeeCapacity = $maximumAttendeeCapacity;
+    }
+
+    public function getIsOpenForRegistrations(): bool
+    {
+        return $this->is_open_for_registrations;
+    }
+
+    public function setIsOpenForRegistrations(bool $isOpenForRegistrations): void
+    {
+        $this->is_open_for_registrations = $isOpenForRegistrations;
     }
 }

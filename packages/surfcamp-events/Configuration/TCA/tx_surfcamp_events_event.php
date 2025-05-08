@@ -133,7 +133,7 @@ return [
         'registration' => [
             'label' => 'Registrations',
             'config' => [
-                'type' => 'inline',
+                'type' => 'passthrough',
                 'foreign_table' => 'tx_surfcamp_events_registration',
                 'foreign_field' => 'registration',
             ],
