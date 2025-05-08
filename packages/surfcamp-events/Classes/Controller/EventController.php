@@ -27,4 +27,32 @@ class EventController extends ActionController
         ]);
         return $this->htmlResponse();
     }
+
+    /**
+     * Get the Events Locations
+     * @return ResponseInterface
+     */
+    public function locationsMapAction(): ResponseInterface
+    {
+        $events = $this->eventRepository->findAll();
+
+        $locations = [];
+        foreach ($events as $event) {
+            $location = $event->getLocation();
+            if ($location !== null && $location->getLatitude() !== null && $location->getLongitude() !== null) {
+                $locations[] = [
+                    'lat' => $location->getLatitude(),
+                    'lng' => $location->getLongitude(),
+                    'title' => $event->getTitle()
+                ];
+            }
+        }
+
+        $this->view->assignMultiple([
+            'locations' => $locations,
+            'events' => $events,
+        ]);
+
+        return $this->htmlResponse();
+    }
 }

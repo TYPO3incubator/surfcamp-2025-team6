@@ -20,10 +20,10 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'name, street, street_nr, zip, city, country, long, lat',
+        'showRecordFieldList' => 'name, street, street_nr, postal_code, city, country, longitude, latitude',
     ],
     'types' => [
-        '1' => ['showitem' => 'name, street, street_nr, zip, city, country, long, lat'],
+        '1' => ['showitem' => 'name, street, street_nr, postal_code, city, country, longitude, latitude'],
     ],
     'columns' => [
         'name' => [
@@ -41,13 +41,13 @@ return [
             ],
         ],
         'street_nr' => [
-            'label' => 'Street no',
+            'label' => 'Street Nr',
             'config' => [
                 'type' => 'input',
                 'eval' => 'required,trim',
             ],
         ],
-        'zip' => [
+        'postal_code' => [
             'label' => 'Post code',
             'config' => [
                 'type' => 'input',
@@ -68,18 +68,20 @@ return [
                 'eval' => 'required,trim',
             ],
         ],
-        'lat' => [
-            'label' => 'Latitute',
+        'latitude' => [
+            'label' => 'Latitude',
             'config' => [
-                'type' => 'number',
-                'format' => 'decimal',
+                'type' => 'input',
+                'eval' => 'double',
+                'size' => 20,
             ],
         ],
-        'long' => [
+        'longitude' => [
             'label' => 'Longitude',
             'config' => [
-                'type' => 'number',
-                'format' => 'decimal',
+                'type' => 'input',
+                'eval' => 'double',
+                'size' => 20,
             ],
         ],
         'timezone' => [

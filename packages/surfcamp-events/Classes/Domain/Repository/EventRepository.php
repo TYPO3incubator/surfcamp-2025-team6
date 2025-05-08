@@ -22,5 +22,4 @@ class EventRepository extends Repository
         $querySettings->setRespectStoragePage(false);
         $this->setDefaultQuerySettings($querySettings);
     }
-
 }
