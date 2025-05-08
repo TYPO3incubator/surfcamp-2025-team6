@@ -32,6 +32,8 @@ final class RegistrationService
             return RegistrationStatus::STATUS_ALREADY_REGISTERED;
         }
 
+        // TODO: Check if Event is in the past
+
         $this->persistNewRegistration($event, $email);
         return RegistrationStatus::STATUS_SUCCESSFUL;
     }
