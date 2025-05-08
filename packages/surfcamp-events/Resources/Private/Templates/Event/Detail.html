@@ -46,5 +46,49 @@
             <f:form.submit value="Submit registration" class="btn btn-primary"></f:form.submit>
         </f:form>
     </f:if>
+<h3>{event.title}</h3>
+<small>📍{event.location.name}</small> <br/>
+<small>
+    <f:if condition="{event.startDateTime}">
+        🕓 {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}
+    </f:if>
+    <f:if condition="{event.endDateTime}">
+        - {event.endDateTime -> f:format.date(format: 'd.m.Y g:i a')}
+    </f:if>
+</small>
+<p>{event.description}</p>
+
+<f:if condition="{event.appointment}">
+    <f:for each="{event.appointment}" as="appointment">
+        <div class="card">
+            <h5 class="card-title">{appointment.title}</h5>
+            <div class="card-body">
+                <f:if condition="{appointment.isOpenForRegistrations}">
+                    <f:form
+                            action="processAppointmentRegistration"
+                            controller="Registration"
+                            objectName="appointment"
+                            object="{appointment}"
+                            method="post">
+                        <f:render partial="SignUpForm"></f:render>
+                        <f:form.hidden name="event" value="{event}"></f:form.hidden>
+                    </f:form>
+                </f:if>
+            </div>
+        </div>
+    </f:for>
+</f:if>
+
+<f:if condition="{event.isOpenForRegistrations} && !{isInPast} && !{event.appointment}">
+    <h4>Sign Up</h4>
+    <f:form
+        action="processRegistration"
+        controller="Registration"
+        objectName="event"
+        object="{event}"
+        method="post">
+        <f:render partial="SignUpForm"></f:render>
+    </f:form>
+</f:if>
 
 </div>

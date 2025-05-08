@@ -30,11 +30,17 @@ return [
         'event' => [
             'label' => 'Event',
             'config' => [
-                'type' => 'passthrough',
+                'type' => 'inline',
                 // 'foreign_table' => 'tx_surfcamp_events_event',
                 // 'minitems' => 1,
                 // 'maxitems' => 1,
             ],
         ],
+        'appointment' => [
+            'label' => 'Appointment',
+            'config' => [
+                'type' => 'inline',
+            ]
+        ]
     ],
 ];

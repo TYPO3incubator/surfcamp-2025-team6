@@ -23,7 +23,7 @@ return [
         'showRecordFieldList' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration'],
+        '1' => ['showitem' => 'event, title, description, start_date_time, end_date_time, timezone, location, registration, is_open_for_registrations, maximum_attendee_capacity'],
     ],
     'columns' => [
         'title' => [
@@ -60,6 +60,7 @@ return [
             'config' => [
                 'type' => 'datetime',
                 'dbType' => 'datetime',
+                'eval' => 'required',
             ],
         ],
         'end_date_time_utc' => [
@@ -106,5 +107,20 @@ return [
                 'foreign_field' => 'registration',
             ],
         ],
+        'is_open_for_registrations' => [
+            'label' => 'Appointment accepts registrations',
+            'onChange' => 'reload',
+            'config' => [
+                'type' => 'check',
+            ]
+        ],
+        'maximum_attendee_capacity' => [
+            'label' => 'Maximum Attendee capacity',
+            'displayCond' => 'FIELD:is_open_for_registrations:>:0',
+            'config' => [
+                'type' => 'number',
+                'min' => 0
+            ]
+        ]
     ],
 ];

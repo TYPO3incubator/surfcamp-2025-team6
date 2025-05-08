@@ -32,6 +32,9 @@ return [
     \TYPO3Incubator\SurfcampEvents\Domain\Model\Appointment::class => [
         'tableName' => 'tx_surfcamp_events_appointment',
         'properties' => [
+            'is_open_for_registrations' => [
+                'fieldName' => 'is_open_for_registrations',
+            ],
             'start_date_time' => [
                 'fieldName' => 'start_date_time',
             ],

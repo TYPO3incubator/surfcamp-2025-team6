@@ -1,5 +1,7 @@
 <?php
 
+use TYPO3Incubator\SurfcampEvents\Enumeration\EventType;
+
 $timezoneService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3Incubator\SurfcampEvents\Service\TimezoneService::class);
 
 return [
@@ -59,11 +61,11 @@ return [
                 'items' => [
                     [
                         'label' => 'Standard',
-                        'value' => 'standard'
+                        'value' => EventType::EVENT_TYPE_STANDARD
                     ],
                     [
                         'label' => 'Recurring',
-                        'value' => 'recurring'
+                        'value' => EventType::EVENT_TYPE_RECURRING
                     ],
                 ],
                 'default' => 'standard',
