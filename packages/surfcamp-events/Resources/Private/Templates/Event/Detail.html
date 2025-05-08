@@ -1,3 +1,8 @@
+<f:asset.script
+    identifier="get-event-datetime"
+    src="EXT:surfcamp_events/Resources/Public/JavaScript/get_event_datetimes.js"
+/>
+
 <f:flashMessages as="flashMessages">
     <dl class="messages">
         <f:for each="{flashMessages}" as="flashMessage">
@@ -8,35 +13,38 @@
     </dl>
 </f:flashMessages>
 
-<h3>{event.title}</h3>
-<small>📍{event.location.name}</small> <br/>
-<small>
-    <f:if condition="{event.startDateTime}">
-        🕓 {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}
-    </f:if>
-    <f:if condition="{event.endDateTime}">
-        - {event.endDateTime -> f:format.date(format: 'd.m.Y g:i a')}
-    </f:if>
-</small>
-<p>{event.description}</p>
-<f:if condition="{event.isOpenForRegistrations} && !{isInPast}">
-    <h4>Sign Up</h4>
-    <f:form
-        action="processRegistration"
-        controller="Registration"
-        objectName="event"
-        object="{event}"
-        method="post">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <f:form.textfield
-                name="email"
-                id="email"
-                type="email"
-                class="form-control"
-                placeholder="name@example.com"></f:form.textfield>
-        </div>
-        <f:form.submit value="Submit registration" class="btn btn-primary"></f:form.submit>
-    </f:form>
-</f:if>
+<div class="event" data-id="{event.uid}">
 
+    <h3>{event.title}</h3>
+    <small>📍{event.location.name}</small> <br/>
+    <small>
+        <f:if condition="{event.startDateTime}">
+            🕓 <span class="event-start-date">{event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}</span>
+        </f:if>
+        <f:if condition="{event.endDateTime}">
+            - <span class="event-end-date">{event.endDateTime -> f:format.date(format: 'd.m.Y g:i a')}</span>
+        </f:if>
+    </small>
+    <p>{event.description}</p>
+    <f:if condition="{event.isOpenForRegistrations} && !{isInPast}">
+        <h4>Sign Up</h4>
+        <f:form
+            action="processRegistration"
+            controller="Registration"
+            objectName="event"
+            object="{event}"
+            method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <f:form.textfield
+                    name="email"
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    placeholder="name@example.com"></f:form.textfield>
+            </div>
+            <f:form.submit value="Submit registration" class="btn btn-primary"></f:form.submit>
+        </f:form>
+    </f:if>
+
+</div>
