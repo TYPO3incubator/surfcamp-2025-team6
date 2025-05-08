@@ -8,6 +8,7 @@ use DateTime;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Appointment;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
+use TYPO3Incubator\SurfcampEvents\Domain\Model\StartEndDatetimeInterface;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\AppointmentRepository;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
 
@@ -92,7 +93,7 @@ class EventDatetimeService
         return $appointment;
     }
 
-    private function updateStartEndDateTime(Event|Appointment $object): Event|Appointment
+    private function updateStartEndDateTime(StartEndDatetimeInterface $object): StartEndDatetimeInterface
     {
         $startDate = $object->getStartDateTime()->format('Y-m-d\TH:i:s');
         $utcString = $this->timezoneService->convertToUTC($startDate, $object->getTimezone());

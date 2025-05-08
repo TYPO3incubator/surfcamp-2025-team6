@@ -19,12 +19,12 @@ class Location extends AbstractDomainObject
     /**
      * @var float
      */
-    protected float $latitude = 28.07084;
+    protected float $latitude = 0;
 
     /**
      * @var float
      */
-    protected float $longitude = -14.30764;
+    protected float $longitude = 0;
 
     /**
      * @var string
