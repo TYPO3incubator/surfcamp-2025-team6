@@ -12,11 +12,83 @@
         <div class="row">
             <div class="col-12">
                 <h1>Appointments Generation</h1>
-                <p>Implement Functionality here ...</p>
-
-                <f:link.action action="index" class="btn btn-secondary">Back to Dashboard</f:link.action>
+                <div class="col-12 col-sm-12 col-md-12 col-xl-12 mb-3">
+                    <div class="card shadow-none rounded-0 h-100">
+                        <div class="card-body flex-grow-0 pb-3">
+                            <h3 class="card-title mb-2">{event.title}</h3>
+                            <div class="d-flex flex-column flex-wrap gap-1 mt-2">
+                                <div class="d-flex flex-wrap gap-1">
+                                    <f:if condition="{event.startDateTime} > 0">
+                                        <f:then>
+                                            <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-beta">Start: {event.startDateTime -> f:format.date(format: 'd.m.Y g:i a')}</span>
+                                        </f:then>
+                                        <f:else>
+                                            <span class="badge badge-danger">Start: No Start-Date!</span>
+                                        </f:else>
+                                    </f:if>
+                                    <f:if condition="{event.endDateTime} > 0">
+                                        <f:then>
+                                            <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-beta">End: {event.endDateTime -> f:format.date(format: 'd.m.Y g:i a')}</span>
+                                        </f:then>
+                                        <f:else>
+                                            <span class="badge badge-danger">End: No End-Date!</span>
+                                        </f:else>
+                                    </f:if>
+                                </div>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                        <core:icon identifier="actions-calendar-alternative"/>
+                                        <span>{event.eventType -> f:format.case(mode: 'capital')}</span>
+                                    </span>
+                                    <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                        <core:icon identifier="actions-unlock"/>
+                                        <span>Registration</span>
+                                    </span>
+                                    <f:if condition="{event.eventType} !== 'standard'">
+                                        <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                            <core:icon identifier="content-clock" size="small"/>
+                                            <span>{event.appointment -> f:count()} {f:if condition:'{event.appointment}', then: 'Appointment', else: 'Appointments'}  }</span>
+                                        </span>
+                                    </f:if>
+                                    <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                        <core:icon identifier="actions-user"/>
+                                        <span>{event.appointment -> f:count()} {f:if(condition: \'{event.appointment -> f:count()} == 1\x', then: 'Registration', else: 'Registrations'}}</span>
+                                    </span>
+                                    <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                        <core:icon identifier="content-map" size="small"/>
+                                        <f:if condition="{event.location}">
+                                            <f:then><span>{event.location.name}</span></f:then>
+                                            <f:else><span>No Location!</span></f:else>
+                                        </f:if>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="appointments_generator" class="mb-4"></div>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-success">Store the Appointments</button>
+                    <f:link.action action="index" class="btn btn-secondary">Back to Dashboard</f:link.action>
+                </div>
             </div>
         </div>
     </div>
+
+    <f:asset.css identifier="editor">
+        .starrating{direction:rtl;display:inline-block;white-space:nowrap}.starrating>input{display:none}.starrating>label:before{content:'\2606';margin:1px;font-size:18px;font-style:normal;font-weight:400;line-height:1;font-family:Arial;display:inline-block}.starrating>label{color:#888;cursor:pointer;margin:0;margin:8px 0 2px 0}.starrating>label.starrating-display-enabled{margin:1px 0 0 0}.starrating:not(.readonly)>input:hover~label,.starrating>input:checked~label{color:#ffca08}.starrating:not(.readonly)>input:hover~label:before,.starrating>input:checked~label:before{content:'\2605';text-shadow:0 0 1px rgba(0,20,20,1)}.starrating .starrating-display{position:relative;direction:rtl;text-align:center;font-size:10px;line-height:0}
+        span.h3.card-title.level-2 {
+            display: flex !important;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .btn-group>.btn {
+                border-radius: 0;
+        }
+        div[data-schemaid="root"] .card {
+            border-radius: 0 !important;
+        box-shadow: none !important;
+        }
+    </f:asset.css>
 </f:section>
 </html>
