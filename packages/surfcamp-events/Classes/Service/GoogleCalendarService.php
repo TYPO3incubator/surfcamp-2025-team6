@@ -6,12 +6,14 @@ use Cassandra\Date;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Event;
 use TYPO3Incubator\SurfcampEvents\Domain\Model\Location;
 use TYPO3Incubator\SurfcampEvents\Domain\Repository\EventRepository;
+use TYPO3Incubator\SurfcampEvents\Service\EventDatetimeService;
 
 
 final class GoogleCalendarService
 {
     public function __construct(
         protected EventRepository $eventsRepository,
+        private EventDatetimeService $eventDatetimeService
     )
     {}
 
@@ -23,12 +25,13 @@ final class GoogleCalendarService
         $eventLocation = $event->getLocation();
         $googleMapsUrl = $this->getGoogleMapsUrl($eventLocation);
 
-         $startDateTime = $event->getStartDateTime(); 
-         $endDateTime = $event->getEndDateTime(); 
+         $startDateTime = $this->eventDatetimeService->getEventStartDateInTimezone($event, $event->getTimezone());
+ 
+         $endDateTime = $this->eventDatetimeService->getEventEndDateInTimezone($event,  $event->getTimezone());
          
          // Convert local time to the desired format for Google Calendar (Ymd\THis)
-         $startFormatted = $this->formatGoogleCalendarDate($startDateTime, $event->getTimezone());
-         $endFormatted = $this->formatGoogleCalendarDate($endDateTime, $event->getTimezone());
+         $startFormatted = $this->formatGoogleCalendarDate($startDateTime);
+         $endFormatted = $this->formatGoogleCalendarDate($endDateTime);
          
          // URL encode the event details and location
          $eventTitle = urlencode($event->getTitle());
@@ -46,10 +49,9 @@ final class GoogleCalendarService
     /**
      * Format the date into Google Calendar format (Ymd\THis)
      */
-    private function formatGoogleCalendarDate(\DateTime $dateTime, string $timezone): string
+    private function formatGoogleCalendarDate(string $dateTimeString): string
     {
-        // Set the time zone for the DateTime object
-        $dateTime->setTimezone(new \DateTimeZone($timezone));
+        $dateTime = \DateTime::createFromFormat('Y-m-d\TH:i:s', $dateTimeString);
 
         // Return the formatted date in the format Google Calendar expects (Ymd\THis)
         return $dateTime->format('Ymd\THis');
