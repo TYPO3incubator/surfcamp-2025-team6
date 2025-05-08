@@ -28,7 +28,8 @@ class SelectWithTimezoneValidation extends \TYPO3\CMS\Backend\Form\Element\Selec
     {
         $resultArray = parent::render();
 
-        if (!array_key_exists('location', $this->data['databaseRow'])) {
+        if (!array_key_exists('location', $this->data['databaseRow'])
+            || count($this->data['databaseRow']['location']) === 0) {
             return $resultArray;
         }
 
