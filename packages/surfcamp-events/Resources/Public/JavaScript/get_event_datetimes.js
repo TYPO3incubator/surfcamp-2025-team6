@@ -107,8 +107,15 @@ function formatDate(datetime) {
     const month = datetime.getMonth() + 1; // Months are 0-based
     const year = datetime.getFullYear();
 
-    const hours = datetime.getHours();
-    const minutes = datetime.getMinutes();
+    let hours = datetime.getHours();
+    if (hours < 10) {
+        hours += '0';
+    }
+
+    let minutes = datetime.getMinutes();
+    if (minutes < 10) {
+        minutes += '0';
+    }
 
     return `${day}.${month}.${year} ${hours}:${minutes}`;
 }
