@@ -35,14 +35,14 @@ final class EventController extends ActionController
     public function detailAction(Event $event): ResponseInterface
     {
         $googleCalendarUrl = null;
-        
+
         if ($event->getStartDateTime() != 0 && $event->getEndDateTime() != 0) {
             $googleCalendarUrl = $this->googleCalendarService->getGoogleCalendarUrl($event);
         }
-       
+
         $this->view->assignMultiple([
             'event' => $event,
-            'isInPast' => $event->getEndDateTime() != 0 && $event->getEndDateTime() < (new \DateTime())->getTimestamp(),
+            'isInPast' => $event->getEndDateTime() != 0 && $event->getEndDateTime() < new \DateTime(),
             'googleCalendarUrl' => $googleCalendarUrl,
         ]);
 
@@ -56,10 +56,10 @@ final class EventController extends ActionController
     public function locationsMapAction(): ResponseInterface
     {
         $events = $this->eventRepository->findUpcomingEvents();
-        
+
         $locations = [];
         foreach ($events as $event) {
-            
+
             $uri = $this->uriBuilder
             ->reset()
             ->setTargetPageUid($GLOBALS['TSFE']->id)
@@ -101,7 +101,7 @@ final class EventController extends ActionController
         $this->view->assignMultiple([
             'events' => $events
         ]);
-    
+
         return $this->htmlResponse();
     }
 }
