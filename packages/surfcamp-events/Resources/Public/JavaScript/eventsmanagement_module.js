@@ -30,6 +30,7 @@ class EventsManagementModule {
                     const submitButton = document.getElementById('submit-button');
                     submitButton?.addEventListener('click', (event) => {
                         event.preventDefault();
+                        console.log('Submit!');
                         if (jseditor.validate().length > 0) {
                             Notification.warning('Warning', 'Please fix the validation errors before submitting the Appointment Generation form.');
                         } else {
@@ -39,6 +40,8 @@ class EventsManagementModule {
                                 }
                             }).then(async function (response) {
                                 const responseText = await response.resolve();
+                                console.log(responseText);
+                                jseditor.destroy();
                             });
                         }
                     });

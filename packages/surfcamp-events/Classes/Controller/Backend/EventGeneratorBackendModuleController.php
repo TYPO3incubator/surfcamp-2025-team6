@@ -267,11 +267,11 @@ final class EventGeneratorBackendModuleController extends ActionController
                                 "title" => "Options for the Recurring Appointment Generation",
                                 "description" => "Define how the Recurring Appointments should be generated.",
                                 "properties" => [
-                                    '' => [
-                                        'format' => 'info',
-                                        'title' => 'Important',
-                                        'description' => 'Lorem ipsum dolor',
-                                    ],
+//                                    '' => [
+//                                        'format' => 'info',
+//                                        'title' => 'Important',
+//                                        'description' => 'Lorem ipsum dolor',
+//                                    ],
                                     "recurring_type" => [
                                         "title" => "Recurring Generation Type",
                                         "description" => "Select the type of recurring you want to generate.",
