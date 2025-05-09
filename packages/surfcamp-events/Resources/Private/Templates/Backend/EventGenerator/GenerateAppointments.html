@@ -98,8 +98,38 @@
         }
         div[data-schemaid="root"] .card {
             border-radius: 0 !important;
-        box-shadow: none !important;
+            box-shadow: none !important;
         }
+        div[data-schemaid="root"] > span.h3 > button.json-editor-btn-collapse {
+            display: none;
+        }
+        div[data-schematype="array"] > div.card.card-body.my-3.bg-light > span.btn-group button {
+            background: #43ad00;
+            border: none;
+        }
+
+        button.json-editor-btntype-delete {
+            margin-bottom: .5rem;
+            background: #fa5d5d;
+            border: none;
+        }
+
+        button.json-editor-btntype-deleteall {
+            margin-left: .5rem !important;
+            background: red;
+            border: none;
+        }
+
+        div[data-schematype="array"] > div.card.card-body.my-3.bg-light > span.btn-group button.json-editor-btntype-deleteall {
+            background: #fa5d5d;
+            border: none;
+        }
+
+        div[data-schemaid="root"] > .card.card-body.my-3.bg-light {
+            border: none !important;
+            padding: 0;
+        }
+
     </f:asset.css>
 </f:section>
 </html>
