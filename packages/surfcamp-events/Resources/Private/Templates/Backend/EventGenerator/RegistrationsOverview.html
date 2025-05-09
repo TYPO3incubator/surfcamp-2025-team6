@@ -43,16 +43,30 @@
                                         <core:icon identifier="actions-unlock"/>
                                         <span>Registration</span>
                                     </span>
+                                    <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
+                                        <core:icon identifier="actions-user"/>
+                                        <span>
+                                            {event.registration -> f:count()}
+                                            <f:if condition="{event.registration -> f:count()} == 1">
+                                                <f:then>Registration</f:then>
+                                                <f:else>Registrations</f:else>
+                                            </f:if>
+                                        </span>
+                                    </span>
                                     <f:if condition="{event.eventType} !== 'standard'">
                                         <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                             <core:icon identifier="content-clock" size="small"/>
-                                            <span>{event.appointment -> f:count()} {f:if condition:'{event.appointment -> f:count()} == 1', then: 'Appointment', else: 'Appointments'}  }</span>
+                                            <span>
+                                                {event.appointment -> f:count()}
+                                                <f:if condition="{event.appointment -> f:count()} == 1">
+                                                <f:then>Appointment</f:then>
+                                                <f:else>Appointments</f:else>
+                                            </f:if>
+                                            </span>
                                         </span>
                                     </f:if>
-                                    <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
-                                        <core:icon identifier="actions-user"/>
-                                        <span>{event.appointment -> f:count()} {f:if(condition:'{event.appointment -> f:count()} == 1', then: 'Registration', else: 'Registrations'}}</span>
-                                    </span>
+
+
                                     <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                         <core:icon identifier="content-map" size="small"/>
                                         <f:if condition="{event.location}">

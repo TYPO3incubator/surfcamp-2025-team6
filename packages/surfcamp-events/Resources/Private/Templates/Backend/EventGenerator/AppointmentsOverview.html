@@ -40,7 +40,7 @@
                                     <f:if condition="{event.eventType} !== 'standard'">
                                         <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
                                             <core:icon identifier="content-clock" size="small"/>
-                                            <span>{event.appointments -> f:count()} Appointments</span>
+                                            <span>{event.appointment -> f:count()} Appointments</span>
                                         </span>
                                     </f:if>
                                     <span class="badge d-flex flex-row align-items-center gap-1 flex-wrap flex-grow-0 badge-default">
@@ -63,7 +63,9 @@
                                     <f:for each="{event.appointment}" as="appointment">
                                         <div class="appointment d-flex flex-row align-items-center gap-2">
                                             <div class="d-flex flex-column flex-grow-1">
-                                                <h4 class="mb-0">{appointment.title}</h4>
+                                                <p>🕓 Date: <span class="event-start-date">{appointment.startDateTime -> f:format.date(format:
+                                                'd.m.Y g:i a')}</span> - <span class="event-end-date">{appointment.endDateTime ->
+                                                f:format.date(format: 'd.m.Y g:i a')}</span></p>
                                             </div>
                                         </div>
                                     </f:for>
